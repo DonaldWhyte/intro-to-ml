@@ -1,0 +1,63 @@
+.stroke p {
+    text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
+}
+
+.large p {
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.reveal section img {
+    border: 0px;
+    box-shadow: none;
+    background: none;
+}
+
+/* Experience */
+
+img[alt="bloomberg"] {
+    width: 600px;
+}
+
+img[alt="bt"] {
+    width: 200px;
+    padding-right: 60px;
+}
+
+img[alt="ibm"] {
+    width: 200px;
+}
+
+/* Applications */
+img[alt="education"] {
+    width: 300px;
+}
+
+img[alt="security"] {
+    width: 300px;
+}
+
+img[alt="robotics"] {
+    width: 300px;
+}
+
+img[alt="finance"] {
+    width: 300px;
+}
+
+img[alt="speech recognition"] {
+    width: 300px;
+}
+
+img[alt="advertising"] {
+    width: 300px;
+}
+
+img[alt="venn diagram"] {
+    width: 400px;
+}
+
