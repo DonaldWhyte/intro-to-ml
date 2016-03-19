@@ -8,6 +8,18 @@
     2px 2px 0 #000;
 }
 
+.stroke h2 {
+    text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;
+}
+
+p.small {
+    font-size: 26px
+}
+
 .large p {
     font-size: 64px;
     font-weight: bold;
@@ -37,6 +49,23 @@ img[alt="ibm"] {
 
 img[alt="helper.io"] {
     width: 130px;
+}
+
+/* Title */
+
+#dft-notice {
+    float: right;
+}
+
+#dft-notice p {
+    font-size: 18px;
+    margin: 5px;
+    text-align: center;
+}
+
+img[alt="department for transport"] {
+    width: 175px;
+    margin: 5px;
 }
 
 /* Applications */
@@ -79,3 +108,24 @@ img[alt="venn diagram"] {
     margin-top: 32px
 }
 
+/* Spot Check Algorithms */
+
+#linear-data-space-container {
+    background-color: white;
+}
+
+img[alt="recursive data space"] {
+    width: 600px;
+}
+
+img[alt="decision tree"] {
+    width: 300px;
+}
+
+img[alt="arbitrary data space"] {
+    width: 600px;
+}
+
+img[alt="neural network"] {
+    width: 300px;
+}

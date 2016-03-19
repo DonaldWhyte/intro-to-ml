@@ -50,6 +50,12 @@
                 / <a href="http://twitter.com/donald_whyte">@donald_whyte</a>
               </small>
             </p>
+
+            <div id="dft-notice">
+              <p>Originally made for:</p>
+              <img src="images/department-for-transport.svg"
+                   alt="department for transport" />
+            </div>
           </section>
 
           <section data-markdown>
@@ -167,16 +173,6 @@ Reiterate the goal of machine learning -- TODO
                 - learn through trial and error
             </script>
           </section>
-
-          <section>
-            <div style="width: 50%; float: left">
-              <h3>Supervised Learning</h3>
-            </div>
-
-            <div style="width: 50%; float: right">
-              <h3>Unsupervised Learning</h3>
-            </div>
-          </section>
         </section>
 
         <section>
@@ -203,9 +199,10 @@ up a shape, or even the raw binary data that makes up the image.
             <ul>
               <li>A feature is some property that describes raw input data</li>
               <li>
-                An input can be represented as a vector in **feature space
-                <ul><li>2 features = 2D vector = 2D space</li></ul>
+                An input can be represented as a vector in
+                <strong>feature space</strong>
               </li>
+              <li>2 features = 2D vector = 2D space</li>
             </ul>
 
             <center>
@@ -233,11 +230,11 @@ reduce the dimensionality of the data.
 ">
             ### Why Use Feature Space?
 
-            * Could simply use raw binary data as input
-            * Raw input highly complex and noisy
-            * Abstract the complexity away by using features
+            ![feature-extractor](images/feature-extractor.svg)
 
-            ![feature-extractor][images/feature-extractor.svg]
+            * Could simply use raw binary data as input
+            * Raw inputs are complex and noisy
+            * Abstract the complexity away by using features
           </section>
 
           <section data-notes="
@@ -267,9 +264,16 @@ a compe
 ">
             <h3>Choose a Suitable Model</h3>
 
-            <center>
-              <div id="shape-plot-complex"></div>
-            </center>
+            <div style="width: 50%">
+              <center>
+                <div id="shape-plot-complex"></div>
+              </center>
+            </div>
+            <div style="width: 50%">
+              <center>
+                <div id="shape-plot-overfitting"></div>
+              </center>
+            </div>
           </section>
 
           <section data-markdown data-notes="
@@ -297,13 +301,17 @@ Extracting useful features from the input data, features that have some
 correlation to the correct outputs, don't take an enourmous amount of processing
 time to extract, and are not redundant (tell us the same thing as other features).
 ">
-          ### So what is machine learning?
+            <script type="text/template">
+              ### So what is machine learning?
 
-          1. extracting useful **features** from input data <!-- .element: class="fragment" data-fragment-index="1" -->
-          2. choosing a suitable **model** <!-- .element: class="fragment" data-fragment-index="2" -->
-          3. collecting a comprehensive **training dataset** <!-- .element: class="fragment" data-fragment-index="3" -->
+              1. extracting useful features from input data <!-- .element: class="fragment" data-fragment-index="1" -->
+              2. choosing a suitable model <!-- .element: class="fragment" data-fragment-index="2" -->
+              3. collecting a comprehensive training dataset <!-- .element: class="fragment" data-fragment-index="3" -->
 
-          Doing this in a **SYSTEMATIC** way! <!-- .element: class="fragment" data-fragment-index="4" -->
+              <div style="height: 60px"></div>
+
+              #### Doing this in a SYSTEMATIC way! <!-- .element: class="fragment" data-fragment-index="4" -->
+            </script>
           </section>
 
         </section>
@@ -314,28 +322,220 @@ time to extract, and are not redundant (tell us the same thing as other features
           </section>
 
           <section data-markdown data-notes="
-TODO: explain process
+When trying to solve a problem with machine learning, I follow a multi-step
+process rigorously. After looking into how others approach machine learning
+problem, I found remarkable similaraties between my methodology and Jason
+Brownlee.
+
+Jason has done a much better job of formalising these steps, so I've listed his
+personal process here.
+
+[LIST STEPS]
+
+Some of this may seem obvious, but formalising this stuff helps. I'm sure I'm
+not the only one who's found myself getting off track and pursuing a tangent
+that wastes hours, or even days, of my time. Now that I always keep these steps
+in mind, I've personally found myself being a lot more systematic and getting to
+good solutions faster.
 ">
-            ![machine learning process](images/process.svg)
+            [Jason Brownlee's Process](http://machinelearningmastery.com/process-for-working-through-machine-learning-problems/):
+
+            1. define the problem
+            2. prepare data
+            3. spot check algorithms
+            4. improve results
+            5. present results
           </section>
 
           <section data-markdown>
-            TODO: each step of the process in one slide
+            ### 1. Define the Problem
+
+            Models are useless if you're solving the wrong problem
+
+            * what is it you exactly want to do?
+            * primary requirement: speed? correctness?
+            * what does the data come from?
+            * how will users/systems be affected by your model?
           </section>
 
-          <section data-background="images/machinelearningalgorithms.png" data-notes="
-TODO: diagram of lots of different categories in background
-
-TODO: emphasize
-">
-          </section>
-        </section>
-
-        <section>
           <section data-markdown>
-            ## Example Time
+            TODO: introduce example problem!
+          </section>
 
-            #### Face or Vegetable?
+          <section data-markdown>
+            ### 2. Prepare the Data
+
+            Garbage in, garbage out
+
+            * What's the source of the data?
+              - collected by your system(s)?
+              - provided by third-parties?
+            * Which features to extract?
+              - more features **&#8800;** better accuracy
+              - how long does it take to extract features?
+          </section>
+
+          <section data-markdown>
+            ### Data Sources
+
+            TODO: define data sources
+          </section>
+
+          <section data-markdown>
+            ### Coalescing and Scrubbing Data
+
+            TODO: define tools I used to scrub data
+
+            TODO: and what I scrubbed
+          </section>
+
+          <section data-markdown>
+            ### Feature Selection
+
+            TODO: Python tools for doing it
+          </section>
+
+          <section data-markdown>
+            ### 3. Spot Check Algorithms
+          </section>
+
+          <section data-markdown data-background="#fff" data-notes="
+There are hundreds of machine learning algorithms out there, all training the
+dozens of model types out there if varying ways.
+
+How do you know what's going to work best with your problem's data?
+">
+          ![](images/machinelearningalgorithms.png)
+          </section>
+
+          <section data-background="#fff" data-notes="
+First, we must understand the structure data. We can inspect the input features
+ourselves and manually visualise the relation between each pair of features,
+and the relation between each feature and the output class.
+
+For example, let's suppose we want to predict the amount of frozen yoghurt
+sold in one day. Suppose one of our data points is the highest temparature
+during that day.
+
+We can very clearly see linear relationship between temparature and yoghurt
+sold. Hence, it makes sense to try out a linear regression model.
+">
+            <div id="linear-data-space-container">
+              <img src="images/data-space1.png" alt="linear data space" />
+            </div>
+          </section>
+
+          <section data-markdown data-background="#fff" data-notes="
+Suppose we want to predict if whether or not a person attended the Burning Man
+festival in Nevada. Also suppose age and salary are two of the features we've
+collected. When plotting the two features against the class, we see a clear
+section in the feature space where burning
+
+Discriminating between the two classes correctly requires us to split the feature
+space in a non-linear way. Multiple discriminants are required to achieve this
+discrimination.
+
+One way we can do this is segment the feature space recursively, using a
+technique called decision trees.
+">
+            ![recursive data space](images/data-space2.png)
+            ![decision tree](images/decision-tree.png)
+          </section>
+
+          <section data-markdown data-background="#fff" data-notes="
+And also if we see our data has even more complicated boundaries, we can bring
+out the big guns and try a neural network.
+
+This is all well and good, but this process of manually comparing features and
+classes is time consuming, especially when you have a large number of features
+and many data points. Exploring and determining the structure of
+high-dimensional datasets is time-consuming and complex.
+
+We can do better than this.
+">
+            ![arbitrary data space](images/data-space3.png)
+            ![neural network](images/neural-network.png)
+          </section>
+
+          <section data-markdown data-notes="
+So how do you select which algorithms to use?
+
+Should we always hand-pick ourselves? Other than exploring the data to find the
+right models being a time-consuming process, humans are prone to bias and
+mistakes.
+
+We have a tendency to pick algorithms we've used before, or make assumptions
+about the shape of the decision boundary with little basis.
+
+Solution? Let computers choose for us...
+">
+            Which algorithm to use?
+
+            * Humans can be biased
+            * Take the decision out of our hands entirely
+            * **Automate** the selection of algorithms
+          </section>
+
+          <section data-markdown data-notes="
+By simply running the data on every algorithm you can!
+
+Note that choosing what statistical tests to use is another topic entirely,
+which we'll leave out of this talk!
+">
+            Spot check every algorithm you can!
+
+            * Run your dataset(s) across dozens of algorithms
+            * **10-fold cross-validation**
+              - measure accuracy, false positives and false negatives
+            * compare results of each algorithm using statistical tests
+              - say *"algorithm A is better than B"* with confidence
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              #### End Result
+
+              A list of all commonly used algorithms ranked by accuracy
+
+              (add some rarer algorithms in there too) <!-- .element: class="small" -->
+            </script>
+          </section>
+
+          <section data-markdown data-notes="
+Show code running
+">
+            TODO: tools and automate
+
+
+          </section>
+
+          <section data-markdown>
+            ### 4. Improve Results
+
+            * Pick top `x` algorithms from previous step
+            * Smaller set of algorithms to manually investigate
+            * Greater confidence chosen algorithms are naturally good at
+              picking out the structure of the dataset / feature space
+          </section>
+
+          <section data-markdown data-notes="
+We should use the same statistical tests that
+">
+            #### Squeeze out Remaining Performance
+
+            1. algorithm tuning
+              - tune parameters of each algorithm for better accuracy
+            2. ensembles
+              - combine 'okay' models
+              - good when
+            3. refine features
+          </section>
+
+          <section data-markdown>
+          </section>
+
+          <section data-markdown>
+            ### 5. Present Results
 
             TODO
           </section>
@@ -346,24 +546,45 @@ TODO: emphasize
                 Some nice conclusion slide
             </section>
 
+            <section data-markdown>
+              ## Useful Resources
 
-          <section data-markdown data-background="images/stb-background.jpg"
-                   data notes="
-I also love hackathons, and have attended, mentored and helped organise almost
-20 hackathons across the world.
+              TODO
+            </section>
 
-And actually mentored and helped many particpants apply machine learning to
-solve their target problems.
+            <section data-markdown>
+              ## Get in Touch
 
-Currently, I'm co-organiser of StartupBus Europe, a cross-country hackathon on
-wheels where seven buses from different countries build products and companies
-on the road.
+              [donaldwhyte0@gmail.com](mailto:donaldwhyte0@gmail.com)
 
-We're still accepting applications if people want to get on board. Also, if you
-know an organisation or individual who'd like
-">
-            ![StartupBus UK](startupbus-logo.svg)
-          </section>
+              [@donald_whyte](http://twitter.com/donald_whyte)
+
+              [http://github.com/DonaldWhyte](http://github.com/DonaldWhyte)
+            </section>
+
+            <section data-background="images/stb-background.jpg"
+                     class="stroke"
+                     data notes="
+  I also love hackathons, and have attended, mentored and helped organise almost
+  20 hackathons across the world.
+
+  And actually mentored and helped many particpants apply machine learning to
+  solve their target problems.
+
+  Currently, I'm co-organiser of StartupBus Europe, a cross-country hackathon on
+  wheels where seven buses from different countries build products and companies
+  on the road.
+
+  We're still accepting applications if people want to get on board. Also, if you
+  know an organisation or individual who'd like to get involved, help out or
+  sponsor, then get in touch!
+  ">
+              <img src="images/startupbus-logo.svg" alt="StartupBus UK" />
+
+              <p>
+
+              <p>Email uk@startupbus.com</p>
+            </section>
         </section>
 
       </div>
