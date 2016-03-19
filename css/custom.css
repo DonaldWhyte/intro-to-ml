@@ -1,3 +1,5 @@
+/* General */
+
 .stroke p {
     text-shadow:
     -2px -2px 0 #000,
@@ -25,14 +27,20 @@ img[alt="bloomberg"] {
 
 img[alt="bt"] {
     width: 200px;
-    padding-right: 60px;
+    padding-right: 30px;
 }
 
 img[alt="ibm"] {
     width: 200px;
+    padding-right: 30px;
+}
+
+img[alt="helper.io"] {
+    width: 130px;
 }
 
 /* Applications */
+
 img[alt="education"] {
     width: 300px;
 }
@@ -57,7 +65,17 @@ img[alt="advertising"] {
     width: 300px;
 }
 
+/* What is Machine Learning? */
+
 img[alt="venn diagram"] {
     width: 400px;
+}
+
+/* Supervised Learning */
+
+#shape-plot {
+    width: 500px;
+    height: 400px;
+    margin-top: 32px
 }
 
