@@ -1,3 +1,6 @@
 [submodule "plugin/reveal.js-fullscreen-img"]
 	path = plugin/reveal.js-fullscreen-img
 	url = https://github.com/regisb/reveal.js-fullscreen-img.git
+[submodule "dependencies/regression-js"]
+	path = dependencies/regression-js
+	url = https://github.com/Tom-Alexander/regression-js.git
