@@ -129,3 +129,9 @@ img[alt="arbitrary data space"] {
 img[alt="neural network"] {
     width: 300px;
 }
+
+/* Process Summary */
+
+img[alt="process"]  {
+    width: 700px;
+}

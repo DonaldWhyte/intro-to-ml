@@ -343,7 +343,7 @@ good solutions faster.
             1. define the problem
             2. prepare data
             3. spot check algorithms
-            4. improve results
+            4. tuning
             5. present results
           </section>
 
@@ -505,12 +505,10 @@ which we'll leave out of this talk!
 Show code running
 ">
             TODO: tools and automate
-
-
           </section>
 
           <section data-markdown>
-            ### 4. Improve Results
+            ### 4. Tuning
 
             * Pick top `x` algorithms from previous step
             * Smaller set of algorithms to manually investigate
@@ -519,72 +517,150 @@ Show code running
           </section>
 
           <section data-markdown data-notes="
-We should use the same statistical tests that
+ALGORITHM TUNING involves exploring the space of all possible parameter
+combinations for each chosen algorithm.
+
+ENSEMBLES are good when several algorithms have decent accuracy and the types of
+inputs they struggle to classify are *different* from each other.
+
+For example, if we have a model which accurately identifies only dogs accurately
+and another that only identifies cats, you can join them in an ensemble. This
+could produce a model with greater accuracy, since the weaknesses of each
+individual model is handled by the other models.
+
+FEATURE REFINEMENT is where we try diffrent features, remove some featurs,
+split features into multiple features and run feature selection algorithms
+to improve your feature set.
+
+NOTE: We should use the same statistical tests that we used to rank all the
+algortithms initially to ensure our tuning is truly producing more accurate
+models.
 ">
             #### Squeeze out Remaining Performance
 
             1. algorithm tuning
               - tune parameters of each algorithm for better accuracy
             2. ensembles
-              - combine 'okay' models
-              - good when
-            3. refine features
+              - combine multiple 'okay' models into one, better model
+            3. feature refinement
           </section>
 
-          <section data-markdown>
-          </section>
+          <section data-markdown data-notes="
+This was not an explicit step in my own process, but I like that Jason made it
+explicit.
 
-          <section data-markdown>
+FIRST BULLET
+
+I find presenting the final results of your research a good way of ensuring all
+of your findings are recorded in some way. This information could be important
+when solving similar problems in the future. If you can make the results
+publicly accessible, even better! That way, other data scientists can benefit
+from your research and we prevent each other repeating work someone else has
+already done!
+
+How well the solution performs on your test data, and also the limitations it
+has (for example, the types of input solution struggles with).
+
+SECOND BULLET
+
+It is important to record everything you found along the way, whether it's
+certain algorithms performing poorly, when certain tuning actions vastly
+increased performed.
+">
             ### 5. Present Results
 
-            TODO
+            * Produce document that explains:
+              - problem
+              - solution (final algorithm/features/datasets used)
+              - accuracy / speed of solution
+              - limitations of solution
+            * Be sure to list any other insights discovered along the way
           </section>
         </section>
 
         <section>
-            <section data-markdown>
-                Some nice conclusion slide
-            </section>
+          <section data-markdown data-notes="
+If this process is done manually, then it will take a very long time. Humans
+also get impatient and are error-prone, so if one small mistake is made in the
+middle, we could get invalid findings.
 
-            <section data-markdown>
-              ## Useful Resources
+That's why...
+">
+            ![process](images/process.svg)
+          </section>
 
-              TODO
-            </section>
+          <section data-markdown data-notes="
+...automation is key.
 
-            <section data-markdown>
-              ## Get in Touch
+One needs to create a test harness that automates x. Automates y. Automates z.
 
-              [donaldwhyte0@gmail.com](mailto:donaldwhyte0@gmail.com)
+Above all, we need to trust the harness is doing the right thing. It pays to
+spend some time building this and ensuring it's right.
+">
+            ### Automation is Key
 
-              [@donald_whyte](http://twitter.com/donald_whyte)
+            * Create a test harness that:
+              - feature extraction
+              - trains models using many algorithms
+              - evaluates models in a rigorous way
+            * Need to trust the harness
+          </section>
 
-              [http://github.com/DonaldWhyte](http://github.com/DonaldWhyte)
-            </section>
+          <section data-markdown data-notes="
+Following this process and automating it has saved me **MONTHS** of effort.
 
-            <section data-background="images/stb-background.jpg"
-                     class="stroke"
-                     data notes="
-  I also love hackathons, and have attended, mentored and helped organise almost
-  20 hackathons across the world.
+It allowed me to focus on the problem instead of repetitive, manual tasks.
+">
+            This process has saved me **MONTHS** of effort.
+          </section>
+        </section>
 
-  And actually mentored and helped many particpants apply machine learning to
-  solve their target problems.
+        <section>
+          <section data-markdown>
+            ## Summary
+          </section>
 
-  Currently, I'm co-organiser of StartupBus Europe, a cross-country hackathon on
-  wheels where seven buses from different countries build products and companies
-  on the road.
+          <section data-markdown>
+            TODO
+          </section>
 
-  We're still accepting applications if people want to get on board. Also, if you
-  know an organisation or individual who'd like to get involved, help out or
-  sponsor, then get in touch!
-  ">
-              <img src="images/startupbus-logo.svg" alt="StartupBus UK" />
+          <section data-markdown>
+            ### Useful Resources
 
-              <p>
+            TODO
+          </section>
 
-              <p>Email uk@startupbus.com</p>
-            </section>
+          <section data-markdown>
+            ### Get in Touch
+
+            [donaldwhyte0@gmail.com](mailto:donaldwhyte0@gmail.com)
+
+            [@donald_whyte](http://twitter.com/donald_whyte)
+
+            [http://github.com/DonaldWhyte](http://github.com/DonaldWhyte)
+          </section>
+
+          <section data-background="images/stb-background.jpg"
+                   class="stroke large"
+                   data notes="
+I also love hackathons, and have attended, mentored and helped organise almost
+20 hackathons across the world.
+
+And actually mentored and helped many particpants apply machine learning to
+solve their target problems.
+
+Currently, I'm co-organiser of StartupBus Europe, a cross-country hackathon on
+wheels where seven buses from different countries build products and companies
+on the road.
+
+We're still accepting applications if people want to get on board. Also, if you
+know an organisation or individual who'd like to get involved, help out or
+sponsor, then get in touch!
+">
+            <img src="images/startupbus-logo.svg" alt="StartupBus UK" />
+
+            <p>uk@startupbus.com</p>
+          </section>
         </section>
 
       </div>
