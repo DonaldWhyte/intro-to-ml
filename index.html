@@ -4,10 +4,11 @@
   <head>
     <meta charset="utf-8">
 
-    <title>reveal.js – The HTML Presentation Framework</title>
+    <title>Introduction to Machine Learning -- A Whirlwind Tour</title>
 
-    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-    <meta name="author" content="Hakim El Hattab">
+    <meta name="description"
+          content="High-level introduction to machine learning and the practical process of applying it to solve problems">
+    <meta name="author" content="Dinald Whyte">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -64,7 +65,12 @@
 
           <section data-markdown data-background="images/bloomberg.jpg"
                    class="stroke large bloomberg" data-notes="
-TODO: what I do as an infra engineer and what I use ML fors
+I currently work for Bloomberg as an infrastructure engineer. I help design
+and build the low-level systems that keep financial data flowing to the resty
+of the world.
+
+My role is essentially a hybrid between a software engineer, architect and
+data scientist. I dabble in a bit of everything basically!
 ">
             ![bloomberg](images/bloomberg-logo.svg)
 
@@ -73,13 +79,23 @@ TODO: what I do as an infra engineer and what I use ML fors
 
           <section data-markdown data-background="images/hackamena.jpg"
                    class="stroke large bloomberg" data-notes="
+Have participated in, mentored at and organised 17 hackathons, across the world.
+
+In countries such as: Egypt, UAE, Italy, Germany, the US and, of course, the UK.
 ">
             Hackathons
 
             Organiser / Mentor / Hacker
           </section>
 
-          <section data-markdown>
+          <section data-markdown data-notes="
+My machine learning background primarily comes from the work I did at BT and IBM
+
+I've applied machine learning to:
+    * increase global network security,
+    * assist organisations maintain their large, enterprise software estates
+    * and more recently, I've consulted for
+">
             ![bt](images/bt.svg)
             ![ibm](images/ibm.svg)
             ![helper.io](images/helper.svg)
@@ -98,14 +114,30 @@ TODO: what I do as an infra engineer and what I use ML fors
           </section>
 
           <section data-markdown>
-              TODO: definition of ml
+              A mechanism for machines to **learn** behaviour with no human
+              intervention
 
-              **GOAL:** TODO (TODO: fragment)
+              Programs that can **adapt** when exposed to new data
 
-              TODO: empahsise automated nature of it -- auto create models!
+              Based on **pattern recognition**
           </section>
 
-          <section data-markdown>
+          <section data-markdown data-notes="
+Machine learning has been around for a long time, but industry adoption and
+academic research has grown rapidly the past five to ten years.
+
+It's now being used in:
+
+education
+security
+robotics
+finance
+speech recognition
+image recognition
+advertising
+
+...even brewing!
+">
             ![education](images/application1.jpg)
             ![security](images/application2.jpg)
             ![robotics](images/application3.jpg)
@@ -115,13 +147,18 @@ TODO: what I do as an infra engineer and what I use ML fors
           </section>
 
           <section data-background="images/ml-landscape-dec15.jpg" data-notes="
-Motivation
+Nowadays, machine learning is everywhere. You can't avoid it.
 
-TODO
+When you look on Facebook, machine learning determines what you see. When you
+pay for your lunch with your credit card, machine learning decides whether the
+transaction goes through, or if you're a fraud.
 
-TODO: list a bunch of industries that adopt ML
+Global markets are affected by the machine learning algorithms hedge funds
+execute.
 
-TODO: list a bunch of companies that (not just the big 'tech' companies)
+Behind me is a tiny portion of the machine learning focused companies out there
+today. ML has spurred innovation in dozens of industries, and it's slowly
+toucing more and more.
 ">
           </section>
 
@@ -142,15 +179,27 @@ TODO: list a bunch of companies that (not just the big 'tech' companies)
           * produces:
             - greater volume
             - greater variety
+          * because it's *cool*
           </section>
 
-
           <section data-markdown data-notes="
-Explain differences
+One thing to thing before I move on is the difference between data mining,
+machine learning and statistics, since I've seen people
 
-also explain there is overlap (and give a couple of examples)
+Data mining applies methods from many different areas to identify previously
+unknown patterns from data. This can include statistical algorithms,
+machine learning, text analytics, time series analysis and so on. Data mining
+also includes the study and practice of data storage and data manipulation.
 
-i.e. the other two have different goals, outcomes and often different processed
+Machine learning is a *category* of data mining that uses automated and
+iterative algorithms to learn patterns in data. Machine learning focuses on
+algorithms that learn from data with **minimal human intervention**.
+
+Statistics is a vital tool used by both data mining and machine learning,
+but again, it's not the same thing.
+
+The key is that machine learning's focus is on *automating* pattern recognition,
+which is what makes it different to the other two fields.
 ">
             ### The Difference
 
@@ -158,7 +207,23 @@ i.e. the other two have different goals, outcomes and often different processed
           </section>
 
           <section data-markdown data-notes="
-Reiterate the goal of machine learning -- TODO
+To reiterate, the goal of machine learning is to automate the process of
+recognising patterns in data. This way, we can build systems that adapt to
+constantly changing, and unseen, data.
+
+Machine learning techniques can mostly be broken down into four categories.
+
+supervised learning -- predict an individual's lifespan using historical,
+                       population lifetime data
+
+unsupervised learning -- clustering humans based on their genetic makeup.
+                         this is to categorise people into groups with similar
+                         genetic makeup
+
+reinforcement learning -- used widely in robotics, the learning algorithms
+                          learn through trial and error, with successes and
+                          failures *reinforcing* the computer's knowledge on
+                          what the right output is
 ">
             <script type="text/template">
               ### Learning Types
@@ -166,7 +231,7 @@ Reiterate the goal of machine learning -- TODO
               * supervised learning <!-- .element: class="fragment" data-fragment-index="1" -->
                 - historical data predicts likely future events
               * unsupervised learning <!-- .element: class="fragment" data-fragment-index="2" -->
-                - find structures in previously unstructured data
+                - discover structure in unlabelled data
               * semi-supervised learning <!-- .element: class="fragment" data-fragment-index="3" -->
                 - supervised learning when you don't have enough known historical data
               * reinforcement learning <!-- .element: class="fragment" data-fragment-index="4" -->
@@ -238,38 +303,64 @@ reduce the dimensionality of the data.
           </section>
 
           <section data-notes="
-Finding a function, or model, that effectively discriminates between your inputs
-is the goal of supervised learning.
+Supervised leanring depends on use having a training dataset, that has both
+the input features and the *known* outputs of those feature vectors.
 
-We want to *classify* inputs by extracting salient features and passing the
-resultant vector to a trained model. The model should be able to deduce the
-correct output class by looking at where the input's feature vector lands in
-feature space.
+The training data is used to find a function, or model, that effectively
+discriminates between your inputs.
+
+The model cuts the feature space into regions, where each region
+corresponds to an output class.
+
+In the example here, we see that the model segments the feature space into
+our two output classes -- triangles and squares.
+
+Once we have a trained model, we use it to classify new, unseen data by
+transforming it into a feature vector, mapping it to feature space, and
+chekcing which region the vector is mapped to.
 ">
+            <div class="left-col">
+              <ul>
+                <li>Training data is used to produce a model</li>
+                <li> f(x&#x0304;) = mx&#x0304; + c </li>
+                <li>Model divides feature space into segments</li>
+                <li>Each segment of the divided space corresponds to one
+                    <strong>output class</strong></li>
+              </ul>
+            </div>
+
+            <div class="right-col">
+              <center>
+                <div id="shape-plot-discriminant"></div>
+              </center>
+            </div>
+
+            <div class="clear-col"></div>
+
             <p>
-              Divide the space between the classes with
-              <strong>discriminants</strong>
+              Use trained model to classify new, unseen inputs
             </p>
-
-            <p> f(x&#x0304;) = mx&#x0304; + c </p>
-
-            <center>
-              <div id="shape-plot-discriminant"></div>
-            </center>
           </section>
 
           <section data-notes="
 Now in reality, your data might not be linearly seperable, so we have to use
-a compe
-">
-            <h3>Choose a Suitable Model</h3>
+a more complex model to correctly discriminate between the different output
+classes.
 
-            <div style="width: 50%">
+Of course, we need to be careful our models don't overfit our input training
+data, otherwise it will fail to correctly classify new, unseen data points.
+
+We can see on the diagram on the right, the new instance was incorrectly
+classified as a square, when it is a triangle.
+">
+            <h3>Choosing a Suitable Model</h3>
+
+            <div class="left-col">
               <center>
                 <div id="shape-plot-complex"></div>
               </center>
             </div>
-            <div style="width: 50%">
+            <div class="right-col fragment" data-fragment="1">
               <center>
                 <div id="shape-plot-overfitting"></div>
               </center>
@@ -302,15 +393,17 @@ correlation to the correct outputs, don't take an enourmous amount of processing
 time to extract, and are not redundant (tell us the same thing as other features).
 ">
             <script type="text/template">
-              ### So what is machine learning?
+              ### So what is supervised learning?
 
               1. extracting useful features from input data <!-- .element: class="fragment" data-fragment-index="1" -->
-              2. choosing a suitable model <!-- .element: class="fragment" data-fragment-index="2" -->
+              2. choosing a suitable model type <!-- .element: class="fragment" data-fragment-index="2" -->
               3. collecting a comprehensive training dataset <!-- .element: class="fragment" data-fragment-index="3" -->
+              4. training the chosen model type on the training dataset <!-- .element: class="fragment" data-fragment-index="4" -->
+              5. using trained model to label new, unseed inputs <!-- .element: class="fragment" data-fragment-index="5" -->
 
               <div style="height: 60px"></div>
 
-              #### Doing this in a SYSTEMATIC way! <!-- .element: class="fragment" data-fragment-index="4" -->
+              #### Doing this in a SYSTEMATIC way! <!-- .element: class="fragment" data-fragment-index="6" -->
             </script>
           </section>
 
@@ -630,14 +723,19 @@ It allowed me to focus on the problem instead of repetitive, manual tasks.
             TODO
           </section>
 
-          <section data-markdown>
-            ### Get in Touch
+          <section>
+            <h3>Get in Touch</h3>
 
-            [donaldwhyte0@gmail.com](mailto:donaldwhyte0@gmail.com)
-
-            [@donald_whyte](http://twitter.com/donald_whyte)
-
-            [http://github.com/DonaldWhyte](http://github.com/DonaldWhyte)
+            <div class="left-col">
+              <div class="donald"></div>
+            </div>
+            <div class="right-col">
+              <div class="contact-details">
+                <a href="mailto:donaldwhyte0@gmail.com">donaldwhyte0@gmail.com</a>
+                <a href="ttp://twitter.com/donald_whyte">@donald_whyte</a>
+                <a href="http://github.com/DonaldWhyte">http://github.com/DonaldWhyte</a>
+              </div>
+            </div>
           </section>
 
           <section data-background="images/stb-background.jpg"
@@ -812,9 +910,17 @@ sponsor, then get in touch!
         lineColor: 'white'
       });
 
+      var shapeChartComplex = jQuery.extend(true, {}, shapeChart);
+      // TODO
+
+      var shapeChartOverfitting = jQuery.extend(true, {}, shapeChart);
+      // TODO
+
       $(function () {
         $('#shape-plot').highcharts(shapeChart);
         $('#shape-plot-discriminant').highcharts(shapeChartWithDiscriminant);
+        $('#shape-plot-complex').highcharts(shapeChartComplex);
+        $('#shape-plot-overfitting').highcharts(shapeChartOverfitting);
       });
     </script>
 

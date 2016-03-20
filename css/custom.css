@@ -31,6 +31,21 @@ p.small {
     background: none;
 }
 
+.left-col {
+    width: 50%;
+    float: left;
+}
+
+.right-col {
+    width: 50%;
+    float: right;
+}
+
+.clear-col {
+    float: none;
+    clear: both;
+}
+
 /* Experience */
 
 img[alt="bloomberg"] {
@@ -108,6 +123,18 @@ img[alt="venn diagram"] {
     margin-top: 32px
 }
 
+#shape-plot-discriminant {
+    width: 450px;
+}
+
+#shape-plot-complex {
+    width: 450px;
+}
+
+#shape-plot-overfitting {
+    width: 450px;
+}
+
 /* Spot Check Algorithms */
 
 #linear-data-space-container {
@@ -134,4 +161,19 @@ img[alt="neural network"] {
 
 img[alt="process"]  {
     width: 700px;
+}
+
+/* Get in Touch */
+
+.donald {
+    background-image: url('../images/donald.jpg');
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 125px;
+    width: 400px;
+    height: 400px;
+}
+
+div.contact-details {
+    margin-top: 125px;
 }
