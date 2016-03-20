@@ -135,6 +135,10 @@ img[alt="venn diagram"] {
     width: 450px;
 }
 
+img[alt="k fold cross validation"] {
+    margin-bottom: 0px;
+}
+
 /* Spot Check Algorithms */
 
 #linear-data-space-container {

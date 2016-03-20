@@ -372,13 +372,68 @@ classified as a square, when it is a triangle.
             </div>
           </section>
 
-          <section data-markdown data-notes="
-So for example, you would use classification to predict what type of animal is
-in a picture. Generally, you would pre-define the output classes (e.g. cat, dog,
-pidgeon) and construct a model that uses those classifiers.
+          <section data-markdown>
+            ### Evaluation
 
-If you wanted to predict the lifetime of a human, based on some attributes
-about their lifestyle and current health, then you would use regression.
+            * Many ways to evaluate
+              - overall accuracy, number of false positives, etc.
+            * Depends on what problem you're trying to solve
+              - are false positive acceptable?
+            * `k`-fold cross validation commonly used
+          </section>
+
+          <section data-markdown data-notes="
+Unless the problem you're trying to solve has specific requirements, just
+using overall classification accuracy is reasonable.
+
+However, you shouldn't just use your training dataset to evaluate the accuracy
+of your classifier. As I showed previously, trained models might overfit
+their training data and not classify new, unseen data points correctly.
+
+We want classifiers that generalise and behave correctly *even* with unseen
+instances. This can be achieved by splitting the training dataset into two:
+
+* training -- used to learn the model
+* testing -- used for evaluating model's accuracy on data it hasn't seen
+
+Doing this just once means that we're not using all of our data points for
+training. What if those points capture some essential structure in the data?
+
+We can test using unseen data points and ensure all points are considered for
+training by using K-FOLD CROSS VALIDATION.
+
+With k-fold cross validation, we train a model and tests it *k* times. In each
+iteration, the full dataset is split into training and test sets, but the split
+is different each time.
+
+[HIGHLIGHT DIAGRMA AND EXPLAIN EXAMPLE]
+
+This technique is very common and is good starting point for those unfamiliar
+with applying machine learning.
+">
+            ![k fold cross validation](images/k-fold-cross-validation.svg)
+
+            * testing accuracy just using the training dataset is bad
+            * classifier should generalise to unseen data points
+            * split training data into two sets
+              - one for training
+              - one for testing
+            * perform this process *k* times using different splits
+          </section>
+
+          <section data-markdown data-notes="
+One thing to mention is that I've been focusing on classification here, instead
+of regression. All of the outputs I've discussed have been from discrete, finite
+sets.
+
+You would use classification to predict what type of animal is in a picture.
+Generally, you would pre-define the output classes (e.g. cat, dog, pidgeon)
+and construct a model that uses those classifiers.
+
+Supervised learning can produce models that output continuous values, in which
+case we train regression models instead. If you wanted to predict the lifetime
+of a human, based on some attributes about their lifestyle and current health,
+then you would use regression.
 ">
             ### Discrete or Continuous?
 
@@ -388,6 +443,7 @@ about their lifestyle and current health, then you would use regression.
             * Regression
               - output is a real number from a continuous range
           </section>
+
 
           <section data-markdown data-notes="
 The point I'm trying to make here is that machine learning really just boils
@@ -774,7 +830,6 @@ sponsor, then get in touch!
 
     <script src="lib/js/jquery-latest.min.js"></script>
     <script src="lib/js/highcharts.js"></script>
-    <script src="lib/js/regression.js"></script>
 
     <script>
 
@@ -795,8 +850,7 @@ sponsor, then get in touch!
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true },
-          { src: 'plugin/reveal.js-fullscreen-img/fullscreen-img.js' }
+          { src: 'plugin/notes/notes.js', async: true }
         ]
       });
 
