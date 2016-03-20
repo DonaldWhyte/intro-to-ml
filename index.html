@@ -1,90 +1,928 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>reveal.js – The HTML Presentation Framework</title>
+    <title>Introduction to Machine Learning -- A Whirlwind Tour</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description"
+          content="High-level introduction to machine learning and the practical process of applying it to solve problems">
+    <meta name="author" content="Dinald Whyte">
 
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="css/custom.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
 
-	<body>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>Introduction to Machine Learning</h1>
-					<h3>A Whirlwind Tour</h3>
-					<p>
-						<small>
-							Created by <a href="http://donaldwhyte.co.uk">Donald Whyte</a>
-							/ <a href="http://twitter.com/donald_whyte">@donald_whyte</a>
-						</small>
-					</p>
-				</section>
+  <body>
 
-				<section>
-					<h2>Hello There</h2>
-					<p>
-						reveal.js enables you to create beautiful interactive slide decks using HTML. This presentation will show you examples of what it can do.
-					</p>
-				</section>
-			</div>
-		</div>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <section>
+            <h1>Introduction to Machine Learning</h1>
+            <h3>A Whirlwind Tour</h3>
+            <p>
+              <small>
+                Created by <a href="http://donaldwhyte.co.uk">Donald Whyte</a>
+                / <a href="http://twitter.com/donald_whyte">@donald_whyte</a>
+              </small>
+            </p>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+            <div id="dft-notice">
+              <p>Originally made for:</p>
+              <img src="images/department-for-transport.svg"
+                   alt="department for transport" />
+            </div>
+          </section>
 
-		<script>
+          <section data-markdown>
+            A bit about myself...
+          </section>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+          <section data-markdown data-background="images/bloomberg.jpg"
+                   class="stroke large bloomberg" data-notes="
+I currently work for Bloomberg as an infrastructure engineer. I help design
+and build the low-level systems that keep financial data flowing to the resty
+of the world.
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+My role is essentially a hybrid between a software engineer, architect and
+data scientist. I dabble in a bit of everything basically!
+">
+            ![bloomberg](images/bloomberg-logo.svg)
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
+            Infrastructure Engineer
+          </section>
 
-		</script>
+          <section data-markdown data-background="images/hackamena.jpg"
+                   class="stroke large bloomberg" data-notes="
+Have participated in, mentored at and organised 17 hackathons, across the world.
 
-	</body>
+In countries such as: Egypt, UAE, Italy, Germany, the US and, of course, the UK.
+">
+            Hackathons
+
+            Organiser / Mentor / Hacker
+          </section>
+
+          <section data-markdown data-notes="
+My machine learning background primarily comes from the work I did at BT and IBM
+
+I've applied machine learning to:
+    * increase global network security,
+    * assist organisations maintain their large, enterprise software estates
+    * and more recently, I've consulted for
+">
+            ![bt](images/bt.svg)
+            ![ibm](images/ibm.svg)
+            ![helper.io](images/helper.svg)
+
+            Applied machine learning in:
+
+            * network security
+            * enterprise software management
+            * employment
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## What is Machine Learning?
+          </section>
+
+          <section data-markdown>
+              A mechanism for machines to **learn** behaviour with no human
+              intervention
+
+              Programs that can **adapt** when exposed to new data
+
+              Based on **pattern recognition**
+          </section>
+
+          <section data-markdown data-notes="
+Machine learning has been around for a long time, but industry adoption and
+academic research has grown rapidly the past five to ten years.
+
+It's now being used in:
+
+education
+security
+robotics
+finance
+speech recognition
+image recognition
+advertising
+
+...even brewing!
+">
+            ![education](images/application1.jpg)
+            ![security](images/application2.jpg)
+            ![robotics](images/application3.jpg)
+            ![finance](images/application4.jpg)
+            ![speech recognition](images/application5.jpg)
+            ![advertising](images/application6.jpg)
+          </section>
+
+          <section data-background="images/ml-landscape-dec15.jpg" data-notes="
+Nowadays, machine learning is everywhere. You can't avoid it.
+
+When you look on Facebook, machine learning determines what you see. When you
+pay for your lunch with your credit card, machine learning decides whether the
+transaction goes through, or if you're a fraud.
+
+Global markets are affected by the machine learning algorithms hedge funds
+execute.
+
+Behind me is a tiny portion of the machine learning focused companies out there
+today. ML has spurred innovation in dozens of industries, and it's slowly
+toucing more and more.
+">
+          </section>
+
+          <section data-markdown>
+          ### Growth in Adoption
+
+          TODO: stats on increasing adoption in both academia, industry and government
+
+          TODO: make comments on it, emphasise increasing important of it
+          </section>
+
+          <section data-markdown>
+          ### Why?
+
+          * cheaper computing computer
+          * cheaper data storage
+          * more data than ever &dash; everyone is online
+          * produces:
+            - greater volume
+            - greater variety
+          * because it's *cool*
+          </section>
+
+          <section data-markdown data-notes="
+One thing to thing before I move on is the difference between data mining,
+machine learning and statistics, since I've seen people
+
+Data mining applies methods from many different areas to identify previously
+unknown patterns from data. This can include statistical algorithms,
+machine learning, text analytics, time series analysis and so on. Data mining
+also includes the study and practice of data storage and data manipulation.
+
+Machine learning is a *category* of data mining that uses automated and
+iterative algorithms to learn patterns in data. Machine learning focuses on
+algorithms that learn from data with **minimal human intervention**.
+
+Statistics is a vital tool used by both data mining and machine learning,
+but again, it's not the same thing.
+
+The key is that machine learning's focus is on *automating* pattern recognition,
+which is what makes it different to the other two fields.
+">
+            ### The Difference
+
+            ![venn diagram](images/venn-diagram.svg)
+          </section>
+
+          <section data-markdown data-notes="
+To reiterate, the goal of machine learning is to automate the process of
+recognising patterns in data. This way, we can build systems that adapt to
+constantly changing, and unseen, data.
+
+Machine learning techniques can mostly be broken down into four categories.
+
+supervised learning -- predict an individual's lifespan using historical,
+                       population lifetime data
+
+unsupervised learning -- clustering humans based on their genetic makeup.
+                         this is to categorise people into groups with similar
+                         genetic makeup
+
+reinforcement learning -- used widely in robotics, the learning algorithms
+                          learn through trial and error, with successes and
+                          failures *reinforcing* the computer's knowledge on
+                          what the right output is
+">
+            <script type="text/template">
+              ### Learning Types
+
+              * supervised learning <!-- .element: class="fragment" data-fragment-index="1" -->
+                - historical data predicts likely future events
+              * unsupervised learning <!-- .element: class="fragment" data-fragment-index="2" -->
+                - discover structure in unlabelled data
+              * semi-supervised learning <!-- .element: class="fragment" data-fragment-index="3" -->
+                - supervised learning when you don't have enough known historical data
+              * reinforcement learning <!-- .element: class="fragment" data-fragment-index="4" -->
+                - learn through trial and error
+            </script>
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## Supervised Learning
+
+            Use labeled historical data to predict future outcomes
+          </section>
+
+          <section data-markdown>
+            Given some input data, predict the correct output
+
+            ![shapes](images/shapes.svg)
+
+            What **features** of the input tell us about the output?
+          </section>
+
+          <section data-notes="
+Raw input data in the shape example before would be all of the pixels that make
+up a shape, or even the raw binary data that makes up the image.
+">
+            <h3>Feature Space</h3>
+
+            <ul>
+              <li>A feature is some property that describes raw input data</li>
+              <li>
+                An input can be represented as a vector in
+                <strong>feature space</strong>
+              </li>
+              <li>2 features = 2D vector = 2D space</li>
+            </ul>
+
+            <center>
+              <div id="shape-plot"></div>
+            </center>
+          </section>
+
+          <section data-markdown data-notes="
+Raw input data in the shape example before would be all of the pixels that make
+up a shape, or even the raw binary data that makes up the image.
+
+Other examples of raw inputs include each character in a document, each byte in
+a file, every sample frequency in audio.
+
+These inputs are highly complex and noisy, which makes it incredibly difficult
+to identity patterns and infer greater meaning from the data.
+
+So we abstract away the complexity using feature vectors, which significantly
+reduce the dimensionality of the data.
+
+* Added benefits:
+  - remove redundant information
+  - decreases time it takes to learn a good model
+  - comprehensible by research (REFER TO PREVIOUS SLIDE)
+">
+            ### Why Use Feature Space?
+
+            ![feature-extractor](images/feature-extractor.svg)
+
+            * Could simply use raw binary data as input
+            * Raw inputs are complex and noisy
+            * Abstract the complexity away by using features
+          </section>
+
+          <section data-notes="
+Supervised leanring depends on use having a training dataset, that has both
+the input features and the *known* outputs of those feature vectors.
+
+The training data is used to find a function, or model, that effectively
+discriminates between your inputs.
+
+The model cuts the feature space into regions, where each region
+corresponds to an output class.
+
+In the example here, we see that the model segments the feature space into
+our two output classes -- triangles and squares.
+
+Once we have a trained model, we use it to classify new, unseen data by
+transforming it into a feature vector, mapping it to feature space, and
+chekcing which region the vector is mapped to.
+">
+            <div class="left-col">
+              <ul>
+                <li>Training data is used to produce a model</li>
+                <li> f(x&#x0304;) = mx&#x0304; + c </li>
+                <li>Model divides feature space into segments</li>
+                <li>Each segment of the divided space corresponds to one
+                    <strong>output class</strong></li>
+              </ul>
+            </div>
+
+            <div class="right-col">
+              <center>
+                <div id="shape-plot-discriminant"></div>
+              </center>
+            </div>
+
+            <div class="clear-col"></div>
+
+            <p>
+              Use trained model to classify new, unseen inputs
+            </p>
+          </section>
+
+          <section data-notes="
+Now in reality, your data might not be linearly seperable, so we have to use
+a more complex model to correctly discriminate between the different output
+classes.
+
+Of course, we need to be careful our models don't overfit our input training
+data, otherwise it will fail to correctly classify new, unseen data points.
+
+We can see on the diagram on the right, the new instance was incorrectly
+classified as a square, when it is a triangle.
+">
+            <h3>Choosing a Suitable Model</h3>
+
+            <div class="left-col">
+              <center>
+                <div id="shape-plot-complex"></div>
+              </center>
+            </div>
+            <div class="right-col fragment" data-fragment="1">
+              <center>
+                <div id="shape-plot-overfitting"></div>
+              </center>
+            </div>
+          </section>
+
+          <section data-markdown data-notes="
+So for example, you would use classification to predict what type of animal is
+in a picture. Generally, you would pre-define the output classes (e.g. cat, dog,
+pidgeon) and construct a model that uses those classifiers.
+
+If you wanted to predict the lifetime of a human, based on some attributes
+about their lifestyle and current health, then you would use regression.
+">
+            ### Discrete or Continuous?
+
+            * Classification
+              - output is from a finite, discrete set
+              - of *'classes'*
+            * Regression
+              - output is a real number from a continuous range
+          </section>
+
+          <section data-markdown data-notes="
+The point I'm trying to make here is that machine learning really just boils
+down to three core aspects.
+
+Extracting useful features from the input data, features that have some
+correlation to the correct outputs, don't take an enourmous amount of processing
+time to extract, and are not redundant (tell us the same thing as other features).
+">
+            <script type="text/template">
+              ### So what is supervised learning?
+
+              1. extracting useful features from input data <!-- .element: class="fragment" data-fragment-index="1" -->
+              2. choosing a suitable model type <!-- .element: class="fragment" data-fragment-index="2" -->
+              3. collecting a comprehensive training dataset <!-- .element: class="fragment" data-fragment-index="3" -->
+              4. training the chosen model type on the training dataset <!-- .element: class="fragment" data-fragment-index="4" -->
+              5. using trained model to label new, unseed inputs <!-- .element: class="fragment" data-fragment-index="5" -->
+
+              <div style="height: 60px"></div>
+
+              #### Doing this in a SYSTEMATIC way! <!-- .element: class="fragment" data-fragment-index="6" -->
+            </script>
+          </section>
+
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## Process
+          </section>
+
+          <section data-markdown data-notes="
+When trying to solve a problem with machine learning, I follow a multi-step
+process rigorously. After looking into how others approach machine learning
+problem, I found remarkable similaraties between my methodology and Jason
+Brownlee.
+
+Jason has done a much better job of formalising these steps, so I've listed his
+personal process here.
+
+[LIST STEPS]
+
+Some of this may seem obvious, but formalising this stuff helps. I'm sure I'm
+not the only one who's found myself getting off track and pursuing a tangent
+that wastes hours, or even days, of my time. Now that I always keep these steps
+in mind, I've personally found myself being a lot more systematic and getting to
+good solutions faster.
+">
+            [Jason Brownlee's Process](http://machinelearningmastery.com/process-for-working-through-machine-learning-problems/):
+
+            1. define the problem
+            2. prepare data
+            3. spot check algorithms
+            4. tuning
+            5. present results
+          </section>
+
+          <section data-markdown>
+            ### 1. Define the Problem
+
+            Models are useless if you're solving the wrong problem
+
+            * what is it you exactly want to do?
+            * primary requirement: speed? correctness?
+            * what does the data come from?
+            * how will users/systems be affected by your model?
+          </section>
+
+          <section data-markdown>
+            TODO: introduce example problem!
+          </section>
+
+          <section data-markdown>
+            ### 2. Prepare the Data
+
+            Garbage in, garbage out
+
+            * What's the source of the data?
+              - collected by your system(s)?
+              - provided by third-parties?
+            * Which features to extract?
+              - more features **&#8800;** better accuracy
+              - how long does it take to extract features?
+          </section>
+
+          <section data-markdown>
+            ### Data Sources
+
+            TODO: define data sources
+          </section>
+
+          <section data-markdown>
+            ### Coalescing and Scrubbing Data
+
+            TODO: define tools I used to scrub data
+
+            TODO: and what I scrubbed
+          </section>
+
+          <section data-markdown>
+            ### Feature Selection
+
+            TODO: Python tools for doing it
+          </section>
+
+          <section data-markdown>
+            ### 3. Spot Check Algorithms
+          </section>
+
+          <section data-markdown data-background="#fff" data-notes="
+There are hundreds of machine learning algorithms out there, all training the
+dozens of model types out there if varying ways.
+
+How do you know what's going to work best with your problem's data?
+">
+          ![](images/machinelearningalgorithms.png)
+          </section>
+
+          <section data-background="#fff" data-notes="
+First, we must understand the structure data. We can inspect the input features
+ourselves and manually visualise the relation between each pair of features,
+and the relation between each feature and the output class.
+
+For example, let's suppose we want to predict the amount of frozen yoghurt
+sold in one day. Suppose one of our data points is the highest temparature
+during that day.
+
+We can very clearly see linear relationship between temparature and yoghurt
+sold. Hence, it makes sense to try out a linear regression model.
+">
+            <div id="linear-data-space-container">
+              <img src="images/data-space1.png" alt="linear data space" />
+            </div>
+          </section>
+
+          <section data-markdown data-background="#fff" data-notes="
+Suppose we want to predict if whether or not a person attended the Burning Man
+festival in Nevada. Also suppose age and salary are two of the features we've
+collected. When plotting the two features against the class, we see a clear
+section in the feature space where burning
+
+Discriminating between the two classes correctly requires us to split the feature
+space in a non-linear way. Multiple discriminants are required to achieve this
+discrimination.
+
+One way we can do this is segment the feature space recursively, using a
+technique called decision trees.
+">
+            ![recursive data space](images/data-space2.png)
+            ![decision tree](images/decision-tree.png)
+          </section>
+
+          <section data-markdown data-background="#fff" data-notes="
+And also if we see our data has even more complicated boundaries, we can bring
+out the big guns and try a neural network.
+
+This is all well and good, but this process of manually comparing features and
+classes is time consuming, especially when you have a large number of features
+and many data points. Exploring and determining the structure of
+high-dimensional datasets is time-consuming and complex.
+
+We can do better than this.
+">
+            ![arbitrary data space](images/data-space3.png)
+            ![neural network](images/neural-network.png)
+          </section>
+
+          <section data-markdown data-notes="
+So how do you select which algorithms to use?
+
+Should we always hand-pick ourselves? Other than exploring the data to find the
+right models being a time-consuming process, humans are prone to bias and
+mistakes.
+
+We have a tendency to pick algorithms we've used before, or make assumptions
+about the shape of the decision boundary with little basis.
+
+Solution? Let computers choose for us...
+">
+            Which algorithm to use?
+
+            * Humans can be biased
+            * Take the decision out of our hands entirely
+            * **Automate** the selection of algorithms
+          </section>
+
+          <section data-markdown data-notes="
+By simply running the data on every algorithm you can!
+
+Note that choosing what statistical tests to use is another topic entirely,
+which we'll leave out of this talk!
+">
+            Spot check every algorithm you can!
+
+            * Run your dataset(s) across dozens of algorithms
+            * **10-fold cross-validation**
+              - measure accuracy, false positives and false negatives
+            * compare results of each algorithm using statistical tests
+              - say *"algorithm A is better than B"* with confidence
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              #### End Result
+
+              A list of all commonly used algorithms ranked by accuracy
+
+              (add some rarer algorithms in there too) <!-- .element: class="small" -->
+            </script>
+          </section>
+
+          <section data-markdown data-notes="
+Show code running
+">
+            TODO: tools and automate
+          </section>
+
+          <section data-markdown>
+            ### 4. Tuning
+
+            * Pick top `x` algorithms from previous step
+            * Smaller set of algorithms to manually investigate
+            * Greater confidence chosen algorithms are naturally good at
+              picking out the structure of the dataset / feature space
+          </section>
+
+          <section data-markdown data-notes="
+ALGORITHM TUNING involves exploring the space of all possible parameter
+combinations for each chosen algorithm.
+
+ENSEMBLES are good when several algorithms have decent accuracy and the types of
+inputs they struggle to classify are *different* from each other.
+
+For example, if we have a model which accurately identifies only dogs accurately
+and another that only identifies cats, you can join them in an ensemble. This
+could produce a model with greater accuracy, since the weaknesses of each
+individual model is handled by the other models.
+
+FEATURE REFINEMENT is where we try diffrent features, remove some featurs,
+split features into multiple features and run feature selection algorithms
+to improve your feature set.
+
+NOTE: We should use the same statistical tests that we used to rank all the
+algortithms initially to ensure our tuning is truly producing more accurate
+models.
+">
+            #### Squeeze out Remaining Performance
+
+            1. algorithm tuning
+              - tune parameters of each algorithm for better accuracy
+            2. ensembles
+              - combine multiple 'okay' models into one, better model
+            3. feature refinement
+          </section>
+
+          <section data-markdown data-notes="
+This was not an explicit step in my own process, but I like that Jason made it
+explicit.
+
+FIRST BULLET
+
+I find presenting the final results of your research a good way of ensuring all
+of your findings are recorded in some way. This information could be important
+when solving similar problems in the future. If you can make the results
+publicly accessible, even better! That way, other data scientists can benefit
+from your research and we prevent each other repeating work someone else has
+already done!
+
+How well the solution performs on your test data, and also the limitations it
+has (for example, the types of input solution struggles with).
+
+SECOND BULLET
+
+It is important to record everything you found along the way, whether it's
+certain algorithms performing poorly, when certain tuning actions vastly
+increased performed.
+">
+            ### 5. Present Results
+
+            * Produce document that explains:
+              - problem
+              - solution (final algorithm/features/datasets used)
+              - accuracy / speed of solution
+              - limitations of solution
+            * Be sure to list any other insights discovered along the way
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown data-notes="
+If this process is done manually, then it will take a very long time. Humans
+also get impatient and are error-prone, so if one small mistake is made in the
+middle, we could get invalid findings.
+
+That's why...
+">
+            ![process](images/process.svg)
+          </section>
+
+          <section data-markdown data-notes="
+...automation is key.
+
+One needs to create a test harness that automates x. Automates y. Automates z.
+
+Above all, we need to trust the harness is doing the right thing. It pays to
+spend some time building this and ensuring it's right.
+">
+            ### Automation is Key
+
+            * Create a test harness that:
+              - feature extraction
+              - trains models using many algorithms
+              - evaluates models in a rigorous way
+            * Need to trust the harness
+          </section>
+
+          <section data-markdown data-notes="
+Following this process and automating it has saved me **MONTHS** of effort.
+
+It allowed me to focus on the problem instead of repetitive, manual tasks.
+">
+            This process has saved me **MONTHS** of effort.
+          </section>
+        </section>
+
+        <section>
+          <section data-markdown>
+            ## Summary
+          </section>
+
+          <section data-markdown>
+            TODO
+          </section>
+
+          <section data-markdown>
+            ### Useful Resources
+
+            TODO
+          </section>
+
+          <section>
+            <h3>Get in Touch</h3>
+
+            <div class="left-col">
+              <div class="donald"></div>
+            </div>
+            <div class="right-col">
+              <div class="contact-details">
+                <a href="mailto:donaldwhyte0@gmail.com">donaldwhyte0@gmail.com</a>
+                <a href="ttp://twitter.com/donald_whyte">@donald_whyte</a>
+                <a href="http://github.com/DonaldWhyte">http://github.com/DonaldWhyte</a>
+              </div>
+            </div>
+          </section>
+
+          <section data-background="images/stb-background.jpg"
+                   class="stroke large"
+                   data notes="
+I also love hackathons, and have attended, mentored and helped organise almost
+20 hackathons across the world.
+
+And actually mentored and helped many particpants apply machine learning to
+solve their target problems.
+
+Currently, I'm co-organiser of StartupBus Europe, a cross-country hackathon on
+wheels where seven buses from different countries build products and companies
+on the road.
+
+We're still accepting applications if people want to get on board. Also, if you
+know an organisation or individual who'd like to get involved, help out or
+sponsor, then get in touch!
+">
+            <img src="images/startupbus-logo.svg" alt="StartupBus UK" />
+
+            <p>uk@startupbus.com</p>
+          </section>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script src="lib/js/jquery-latest.min.js"></script>
+    <script src="lib/js/highcharts.js"></script>
+    <script src="lib/js/regression.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/reveal.js-fullscreen-img/fullscreen-img.js' }
+        ]
+      });
+
+      function loadChartEvent(event) {
+        // Remove Highcharts.com marker
+        $("text:contains('Highcharts.com')").remove();
+      }
+
+      var shapeChart = {
+        chart: {
+          type: 'scatter',
+          zoomType: 'xy',
+          backgroundColor: 'rgba(0, 0, 0, 0)',
+          events: {
+            load: loadChartEvent
+          }
+        },
+        title: {
+          text: ''
+        },
+        xAxis: {
+          title: {
+            text: 'Area',
+            style: {
+              fontSize: '24px',
+              color: 'white',
+              'font-weight': 'strong'
+            }
+          },
+          labels: {
+            style: {
+              color: 'white',
+              'font-weight': 'strong',
+              'font-size': '14px'
+            }
+          }
+        },
+        yAxis: {
+          title: {
+            text: 'Perimeter',
+            style: {
+              fontSize: '24px',
+              color: 'white'
+            }
+          },
+          labels: {
+            style: {
+              color: 'white',
+              'font-weight': 'strong',
+              'font-size': '14px'
+            }
+          }
+        },
+        legend: {
+          enabled: false
+        },
+        tooltip: {
+          enabled: false
+        },
+        exporting: {
+          enabled: false
+        },
+        plotOptions: {
+          scatter: {
+            marker: {
+              radius: 10,
+              states: {
+                hover: {
+                  enabled: true,
+                  lineColor: '#000'
+                }
+              }
+            }
+          }
+        },
+        series: [
+          {
+            name: 'Square',
+            marker: {
+              symbol: 'square'
+            },
+            color: 'rgba(223, 83, 83, 1)',
+            data: [
+              [3.7, 0.9], [4.2, 1.2],
+              [3.7, 0.9], [4.2, 1.2],
+              [3.7, 0.9], [4.2, 1.2],
+              [3.7, 0.9], [4.2, 1.2]
+            ]
+          }, {
+            name: 'Triangle',
+            marker: {
+              symbol: 'triangle'
+            },
+            color: 'rgba(119, 152, 191, 1)',
+            data: [
+              [2.75, 0.18], [3.2, 0.22],
+              [2.75, 0.18], [3.2, 0.22],
+              [2.75, 0.18], [3.2, 0.22],
+              [2.75, 0.18], [3.2, 0.22]
+            ]
+          }
+        ]
+      };
+
+      var shapeChartWithDiscriminant = jQuery.extend(true, {}, shapeChart);
+      shapeChartWithDiscriminant["series"].push({
+        type: 'line',
+        name: 'Discriminant',
+        data: [[2.5, 0.4], [4.5, 0.7]],
+        marker: {
+          enabled: false
+        },
+        enableMouseTracking: false,
+        showInLegend: false,
+        lineWidth: 5,
+        lineColor: 'white'
+      });
+
+      var shapeChartComplex = jQuery.extend(true, {}, shapeChart);
+      // TODO
+
+      var shapeChartOverfitting = jQuery.extend(true, {}, shapeChart);
+      // TODO
+
+      $(function () {
+        $('#shape-plot').highcharts(shapeChart);
+        $('#shape-plot-discriminant').highcharts(shapeChartWithDiscriminant);
+        $('#shape-plot-complex').highcharts(shapeChartComplex);
+        $('#shape-plot-overfitting').highcharts(shapeChartOverfitting);
+      });
+    </script>
+
+  </body>
 </html>
