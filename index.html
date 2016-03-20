@@ -162,7 +162,11 @@ toucing more and more.
 ">
           </section>
 
-          <section data-markdown>
+          <section data-markdown data-notes="
+And we can see this when we look at machine learning adoption metrics.
+
+TODO
+">
           ### Growth in Adoption
 
           TODO: stats on increasing adoption in both academia, industry and government
@@ -184,7 +188,7 @@ toucing more and more.
 
           <section data-markdown data-notes="
 One thing to thing before I move on is the difference between data mining,
-machine learning and statistics, since I've seen people
+machine learning and statistics, since I've seen people confuse these terms.
 
 Data mining applies methods from many different areas to identify previously
 unknown patterns from data. This can include statistical algorithms,
@@ -192,11 +196,13 @@ machine learning, text analytics, time series analysis and so on. Data mining
 also includes the study and practice of data storage and data manipulation.
 
 Machine learning is a *category* of data mining that uses automated and
-iterative algorithms to learn patterns in data. Machine learning focuses on
-algorithms that learn from data with **minimal human intervention**.
+iterative algorithms to learn patterns in data.
 
-Statistics is a vital tool used by both data mining and machine learning,
-but again, it's not the same thing.
+Machine learning focuses on algorithms that learn from data with
+**minimal human intervention**.
+
+Statistics is field of study that provides techniques used by both data mining
+and machine learning, but again, it's not the same thing.
 
 The key is that machine learning's focus is on *automating* pattern recognition,
 which is what makes it different to the other two fields.
@@ -324,8 +330,7 @@ chekcing which region the vector is mapped to.
                 <li>Training data is used to produce a model</li>
                 <li> f(x&#x0304;) = mx&#x0304; + c </li>
                 <li>Model divides feature space into segments</li>
-                <li>Each segment of the divided space corresponds to one
-                    <strong>output class</strong></li>
+                <li>Each segment corresponds to one <strong>output class</strong></li>
               </ul>
             </div>
 
@@ -343,8 +348,8 @@ chekcing which region the vector is mapped to.
           </section>
 
           <section data-notes="
-Now in reality, your data might not be linearly seperable, so we have to use
-a more complex model to correctly discriminate between the different output
+Now in reality, your data might not be linearly seperable, so we might have to
+use a more complex model to correctly discriminate between the different output
 classes.
 
 Of course, we need to be careful our models don't overfit our input training
