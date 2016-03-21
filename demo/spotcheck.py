@@ -9,6 +9,7 @@ from sklearn import svm
 from sklearn import tree
 from sklearn import neural_network
 from sklearn import naive_bayes
+from sknn import mlp
 
 # Other Useful Dependencies
 import numpy
@@ -40,16 +41,12 @@ def loadArffDataset(filename, normalise, displayData=False):
     featureVecs = numpy.array([ item[:-1] for item in rows ]) # features
     labels = numpy.array(labelValues)
     numInputFeatures = len(data['attributes'])
-
-    faces = [ list(featureVecs[i][3:5]) for i in range(len(featureVecs)) if labels[i] == labelValueMapping['faces'] ]
-    veg = [ list(featureVecs[i][3:5]) for i in range(len(featureVecs)) if labels[i] == labelValueMapping['vegetables'] ]
-    print faces
-    print veg
+    numLabelTypes = len(labelValueMapping)
 
     if normalise:
         featureVecs = preprocessing.normalize(featureVecs)
 
-    return featureVecs, labels, numInputFeatures
+    return featureVecs, labels, numInputFeatures, numLabelTypes
 
 # ------------------------------------------------------------------------------
 # Dataset Preprocessing
@@ -99,24 +96,23 @@ def computeOverallScores(results):
 
 if __name__ == '__main__':
     # Load dataset
-    featureVecs, labels, numFeatures = loadArffDataset(
+    featureVecs, labels, numFeatures, numLabelTypes = loadArffDataset(
                                            'data/faces_vegetables_dataset.arff',
                                             normalise=True,
                                             displayData=True)
-    raise RuntimeError()
 
     # Construct all classifiers we wish to test, with 'standard' parameters
     classifiers = {
-        'Linear Regression':
-            linear_model.LinearRegression(),
-        'Ridge Regression':
-            linear_model.RidgeRegression(),
         'SVM':
             svm.SVC(kernel='linear', C=1),
         'Decision Tree':
             tree.DecisionTreeClassifier(criterion='gini', splitter='best'),
-        #'Feed-Forward NN':
-        #    neural_network.MLPClassifier(hidden_layer_sizes=(numFeatures)),
+        'Feed-Forward Neural Network (Sigmoid)':
+            mlp.Classifier(layers=[
+                mlp.Layer('Sigmoid', units=numFeatures),
+                mlp.Layer('Sigmoid', units=numLabelTypes),
+            ],
+            n_iter=100),
         'Gaussian Naive Bayes':
             naive_bayes.GaussianNB(),
         'Multi-Nomial Naive Bayes':
