@@ -139,6 +139,12 @@ img[alt="k fold cross validation"] {
     margin-bottom: 0px;
 }
 
+/* Prepare Data */
+
+img[alt="sobel edge detection"] {
+    width: 750px;
+}
+
 /* Spot Check Algorithms */
 
 #linear-data-space-container {
@@ -159,6 +165,14 @@ img[alt="arbitrary data space"] {
 
 img[alt="neural network"] {
     width: 300px;
+}
+
+#face-veg-colour-plot {
+    width: 600px;
+}
+
+#face-veg-satedge-plot {
+    width: 600px;
 }
 
 /* Process Summary */

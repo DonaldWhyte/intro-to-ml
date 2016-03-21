@@ -513,7 +513,9 @@ good solutions faster.
           </section>
 
           <section data-markdown>
-            TODO: introduce example problem!
+            ### Problem: Faces vs Vegetables
+
+            TODO: introduce
           </section>
 
           <section data-markdown>
@@ -530,23 +532,47 @@ good solutions faster.
           </section>
 
           <section data-markdown>
-            ### Data Sources
+            ### Data Source
 
-            TODO: define data sources
+            * 40 images
+              - 20 faces
+              - 20 vegetables
+            * manually labelled by a friend
+              - who we trust
+          </section>
+
+          <section data-markdown data-notes="
+Use quick and easy features to extract so we can get some classification going.
+">
+            ### Features to Extract from Images
+
+            * average intensity of each colour channel across all pixels
+              - red, green, blue
+            * average saturation across all pixels
+              - bright and strong colours
+          </section>
+
+          <section data-markdown data-notes="
+Previous features are summary statistics that only take colour into
+consideration. Let's another feature, this time one related to the shapes in the
+images.
+">
+            ![sobel edge detection](images/sobel-edge-detection.png)
+
+            * how about the complexity of the images?
+            * more complicated shapes have more edge pixels
+            * feature:
+              - proportion of pixels are 'edge pixels'
+            * **sobel edge detection** used to find edge pixels
           </section>
 
           <section data-markdown>
-            ### Coalescing and Scrubbing Data
-
-            TODO: define tools I used to scrub data
-
-            TODO: and what I scrubbed
-          </section>
-
-          <section data-markdown>
-            ### Feature Selection
-
-            TODO: Python tools for doing it
+            1. mean red colour
+            2. mean green colour
+            3. mean blue colour
+            4. mean saturation
+            5. edge pixel ratio
+              - \# edge pixels / \# total pixels
           </section>
 
           <section data-markdown>
@@ -659,6 +685,39 @@ which we'll leave out of this talk!
 Show code running
 ">
             TODO: tools and automate
+
+            TODO: show code
+          </section>
+
+          <section>
+            TODO: summary of results
+          </section>
+
+          <section data-markdown>
+            TODO: show decision tree
+          </section>
+
+          <section data-notes="
+Point out the outliers on the bottom right.
+
+Note that this is due to certain types of vegetables, such as potatoes or
+tomoatoes without much greenery behind them.
+">
+            <center>
+              <div id="face-veg-colour-plot"></div>
+            </center>
+          </section>
+
+          <section data-notes="
+TODO: explain these features fix other issue, so use them in conjunction
+
+TODO: could modify decision tree to do this
+
+TODO: but that might overfit the data anyway...
+">
+            <center>
+              <div id="face-veg-satedge-plot"></div>
+            </center>
           </section>
 
           <section data-markdown>
@@ -975,11 +1034,73 @@ sponsor, then get in touch!
       var shapeChartOverfitting = jQuery.extend(true, {}, shapeChart);
       // TODO
 
+      var faceVegChartBase = jQuery.extend(true, {}, shapeChart);
+      faceVegChartBase.legend = {
+      layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 20,
+            floating: true,
+            backgroundColor: '#333',
+            borderWidth: 2,
+            borderColor: 'white',
+            itemStyle: {
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '20px'
+            }
+      };
+
+      var faceVegColourChart = jQuery.extend(true, {}, faceVegChartBase);
+      faceVegColourChart.xAxis.title.text = 'Mean Red';
+      faceVegColourChart.yAxis.title.text = 'Mean Green';
+      faceVegColourChart.yAxis.min = 60; // makes it easier to read
+      faceVegColourChart.yAxis.max = 220;
+      faceVegColourChart.series = [
+          {
+            name: 'Vegetable',
+            color: 'green',
+            data: [
+[121.63154, 131.638971], [47.923102999999998, 88.907216000000005], [187.84714500000001, 193.602778], [167.05174500000001, 183.695234], [125.74627099999999, 152.06966], [110.879965, 139.72796299999999], [90.664599999999993, 121.874804], [116.252365, 143.345215], [175.28794600000001, 125.68462], [166.02180000000001, 107.82520700000001], [152.61501899999999, 160.552513], [148.64885000000001, 97.281648000000004], [151.59137200000001, 98.444503999999995], [74.829397, 90.77413], [78.815428999999995, 104.375816], [193.569288, 35.297808000000003], [101.35415399999999, 125.37274600000001], [207.368202, 210.48148599999999], [154.91979900000001, 172.450298], [85.453450000000004, 97.503557999999998]
+            ]
+          },
+          {
+            name: 'Face',
+            color: 'salmon',
+            data: [
+[189.51487399999999, 161.52442199999999], [180.34701799999999, 152.15549200000001], [202.840386, 166.79293100000001], [190.83936600000001, 150.84972200000001], [182.40153000000001, 156.747839], [172.70391599999999, 144.28278700000001], [199.59794299999999, 140.28357700000001], [81.593204999999998, 60.961508000000002], [179.404009, 153.87465599999999], [170.070595, 128.13394099999999], [164.76539600000001, 129.64107799999999], [143.48304099999999, 98.366193999999993], [140.06176199999999, 104.846091], [165.27220700000001, 138.054711], [184.808662, 136.735445], [155.20632699999999, 118.75218700000001], [152.49073899999999, 131.87785299999999], [155.638239, 134.99544800000001], [145.59776600000001, 113.839365], [136.396862, 110.231652]
+            ]
+          }
+      ];
+
+      var faceVegSatEdgeChart = jQuery.extend(true, {}, faceVegChartBase);
+      faceVegSatEdgeChart.xAxis.title.text = 'Mean Saturation';
+      faceVegSatEdgeChart.yAxis.title.text = 'Edge Pixel Ratio';
+      faceVegSatEdgeChart.series = [
+          {
+            name: 'Vegetable',
+            color: 'green',
+            data: [
+[0.59593200000000002, 0.67122499999999996], [0.70201499999999994, 0.57808000000000004], [0.17555899999999999, 0.42407400000000001], [0.322714, 0.55174500000000004], [0.53980799999999995, 0.76991399999999999], [0.65932000000000002, 0.81395300000000004], [0.417043, 0.86703300000000005], [0.42941299999999999, 0.77066400000000002], [0.654586, 0.54507499999999998], [0.59687400000000002, 0.81956200000000001], [0.234067, 0.35811199999999999], [0.75917800000000002, 0.55525400000000003], [0.77804700000000004, 0.48641800000000002], [0.59282800000000002, 0.75765300000000002], [0.48323199999999999, 0.18110200000000001], [0.93068700000000004, 0.15890799999999999], [0.35638999999999998, 0.63439999999999996], [0.119183, 0.10445699999999999], [0.387656, 0.52646599999999999], [0.656169, 0.48806699999999997]
+            ]
+          },
+          {
+            name: 'Face',
+            color: 'salmon',
+            data: [
+[0.209062, 0.15003], [0.20863599999999999, 0.38819399999999998], [0.21088000000000001, 0.33875499999999997], [0.28626299999999999, 0.26505800000000002], [0.18093100000000001, 0.389428], [0.29617100000000002, 0.40819699999999998], [0.37652799999999997, 0.122555], [0.31248500000000001, 0.16249], [0.19806499999999999, 0.34207700000000002], [0.316467, 0.21126800000000001], [0.25652000000000003, 0.24348800000000001], [0.43935099999999999, 0.43424499999999999], [0.38750400000000002, 0.33570800000000001], [0.25747999999999999, 0.40101100000000001], [0.35791299999999998, 0.27700000000000002], [0.30728699999999998, 0.10234699999999999], [0.22576599999999999, 0.146427], [0.26536599999999999, 0.29931799999999997], [0.38230500000000001, 0.312276], [0.239536, 0.366562]
+            ]
+          }
+      ];
+
       $(function () {
         $('#shape-plot').highcharts(shapeChart);
         $('#shape-plot-discriminant').highcharts(shapeChartWithDiscriminant);
         $('#shape-plot-complex').highcharts(shapeChartComplex);
         $('#shape-plot-overfitting').highcharts(shapeChartOverfitting);
+        $('#face-veg-colour-plot').highcharts(faceVegColourChart);
+        $('#face-veg-satedge-plot').highcharts(faceVegSatEdgeChart);
       });
     </script>
 

@@ -41,6 +41,11 @@ def loadArffDataset(filename, normalise, displayData=False):
     labels = numpy.array(labelValues)
     numInputFeatures = len(data['attributes'])
 
+    faces = [ list(featureVecs[i][3:5]) for i in range(len(featureVecs)) if labels[i] == labelValueMapping['faces'] ]
+    veg = [ list(featureVecs[i][3:5]) for i in range(len(featureVecs)) if labels[i] == labelValueMapping['vegetables'] ]
+    print faces
+    print veg
+
     if normalise:
         featureVecs = preprocessing.normalize(featureVecs)
 
@@ -98,11 +103,14 @@ if __name__ == '__main__':
                                            'data/faces_vegetables_dataset.arff',
                                             normalise=True,
                                             displayData=True)
+    raise RuntimeError()
 
     # Construct all classifiers we wish to test, with 'standard' parameters
     classifiers = {
         'Linear Regression':
             linear_model.LinearRegression(),
+        'Ridge Regression':
+            linear_model.RidgeRegression(),
         'SVM':
             svm.SVC(kernel='linear', C=1),
         'Decision Tree':
