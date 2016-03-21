@@ -46,6 +46,9 @@ def loadArffDataset(filename, normalise, displayData=False):
     if normalise:
         featureVecs = preprocessing.normalize(featureVecs)
 
+    print [ list(featureVecs[i][:2]) for i in range(len(featureVecs)) if rawLabels[i] == 'faces']
+    print [ list(featureVecs[i][:2]) for i in range(len(featureVecs)) if rawLabels[i] == 'vegetables']
+
     return featureVecs, labels, numInputFeatures, numLabelTypes
 
 # ------------------------------------------------------------------------------
@@ -120,6 +123,14 @@ if __name__ == '__main__':
         'Bernoulli Naive Bayes':
             naive_bayes.BernoulliNB(),
     }
+
+    dt = tree.DecisionTreeClassifier(criterion='gini', splitter='best')
+    dt.fit(featureVecs, labels)
+
+    from StringIO import StringIO
+    out = StringIO()
+    tree.export_graphviz(dt, out_file=out)
+    print out.getvalue()
 
     # Test classifiers and compute their mean scores
     results = evaluateClassifiers(classifiers, featureVecs, labels, 10)

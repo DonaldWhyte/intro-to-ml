@@ -513,10 +513,22 @@ good solutions faster.
             * how will users/systems be affected by your model?
           </section>
 
-          <section data-markdown>
-            ### Problem: Faces vs Vegetables
+          <section data-markdown class="large-table">
+### Faces vs Vegetables
 
-            TODO: introduce
+![face-veg-img](demo/data/face1.jpg)
+![face-veg-img](demo/data/vegetable1.jpg)
+![face-veg-img](demo/data/face5.jpg)
+![face-veg-img](demo/data/vegetable10.jpg)
+![face-veg-img](demo/data/vegetable19.jpg)
+![face-veg-img](demo/data/vegetable7.jpg)
+
+|             |                    |
+| ----------- | ------------------ |
+| **Input:**  | image (rgb pixels) |
+| **Output:** | face or vegetable  |
+
+
           </section>
 
           <section data-markdown>
@@ -685,17 +697,32 @@ which we'll leave out of this talk!
           <section data-markdown data-notes="
 Show code running
 ">
-            TODO: tools and automate
+            ### Let's try it out!
 
-            TODO: show code
-          </section>
+            ![python](images/python.svg)
+            ![sklearn](images/sklearn.svg)
 
-          <section>
-            TODO: summary of results
+            * Python
+            * scikit-learn
+            * Could also use:
+              * Pylearn2, MILK, Theano, ...
           </section>
 
           <section data-markdown>
-            TODO: show decision tree
+| Classifier               | Mean Acc. | Confidence Interval | Lower Bound Acc |
+| ------------------------ | --------- | ------------------- | --------------- |
+| Gaussian Naive Bayes     | 0.975     | 0.15                | 0.825           |
+| Decision Tree            | 0.95      | 0.2                 | 0.75            |
+| Multi-Nomial Naive Bayes | 0.85      | 0.331662            | 0.518338        |
+| SVM                      | 0.775     | 0.415331            | 0.359669        |
+| Neural Network (Sigmoid) | 0.525     | 0.269258            | 0.255742        |
+| Bernoulli Naive Bayes    | 0.5       | 0                   | 0.5             |
+          </section>
+
+          <section data-markdown>
+            Decision tree had good performance
+
+            ![face veg decision tree](images/face-veg-decision-tree.svg)
           </section>
 
           <section data-notes="
@@ -1038,10 +1065,8 @@ sponsor, then get in touch!
       var faceVegChartBase = jQuery.extend(true, {}, shapeChart);
       faceVegChartBase.legend = {
       layout: 'vertical',
-            align: 'left',
+            align: 'right',
             verticalAlign: 'top',
-            x: 100,
-            y: 20,
             floating: true,
             backgroundColor: '#333',
             borderWidth: 2,
@@ -1056,22 +1081,48 @@ sponsor, then get in touch!
       var faceVegColourChart = jQuery.extend(true, {}, faceVegChartBase);
       faceVegColourChart.xAxis.title.text = 'Mean Red';
       faceVegColourChart.yAxis.title.text = 'Mean Green';
-      faceVegColourChart.yAxis.min = 60; // makes it easier to read
-      faceVegColourChart.yAxis.max = 220;
+      faceVegColourChart.yAxis.min = 0.0;
+      faceVegColourChart.yAxis.max = 1.0;
+
+
       faceVegColourChart.series = [
           {
             name: 'Vegetable',
             color: 'green',
             data: [
-[121.63154, 131.638971], [47.923102999999998, 88.907216000000005], [187.84714500000001, 193.602778], [167.05174500000001, 183.695234], [125.74627099999999, 152.06966], [110.879965, 139.72796299999999], [90.664599999999993, 121.874804], [116.252365, 143.345215], [175.28794600000001, 125.68462], [166.02180000000001, 107.82520700000001], [152.61501899999999, 160.552513], [148.64885000000001, 97.281648000000004], [151.59137200000001, 98.444503999999995], [74.829397, 90.77413], [78.815428999999995, 104.375816], [193.569288, 35.297808000000003], [101.35415399999999, 125.37274600000001], [207.368202, 210.48148599999999], [154.91979900000001, 172.450298], [85.453450000000004, 97.503557999999998]
+[0.62825796545311896, 0.67994890219101178], [0.44222595103724671, 0.8204201249170765], [0.58531128491113704, 0.60324521170415235], [0.58041854550606531, 0.63824607479961559], [0.57659280234518728, 0.69729520178836824], [0.59159659922631813, 0.74551419390888884], [0.52946670196963042, 0.71172928052486994], [0.56342968877925348, 0.69473812318093642], [0.77320474934562655, 0.55440175620347742], [0.78059456270452332, 0.50696818313432157], [0.57516649303966305, 0.60508085282821944], [0.8092456798311054, 0.52960216894278223], [0.82423365222562373, 0.53526313538121428], [0.5923025309029224, 0.71851102768489361], [0.5349588901652591, 0.7084497463999504], [0.98126442717469198, 0.17893584103921623], [0.54883891504355209, 0.67890105313957672], [0.58414058069203412, 0.59291046684661053], [0.58717648603601202, 0.65362052267769277], [0.64072049500710948, 0.73107086895513762]
             ]
           },
           {
             name: 'Face',
             color: 'salmon',
             data: [
-[189.51487399999999, 161.52442199999999], [180.34701799999999, 152.15549200000001], [202.840386, 166.79293100000001], [190.83936600000001, 150.84972200000001], [182.40153000000001, 156.747839], [172.70391599999999, 144.28278700000001], [199.59794299999999, 140.28357700000001], [81.593204999999998, 60.961508000000002], [179.404009, 153.87465599999999], [170.070595, 128.13394099999999], [164.76539600000001, 129.64107799999999], [143.48304099999999, 98.366193999999993], [140.06176199999999, 104.846091], [165.27220700000001, 138.054711], [184.808662, 136.735445], [155.20632699999999, 118.75218700000001], [152.49073899999999, 131.87785299999999], [155.638239, 134.99544800000001], [145.59776600000001, 113.839365], [136.396862, 110.231652]
+[0.64335456631161725, 0.54833413478957149], [0.63075130927072298, 0.53215338327208184], [0.61661732290582316, 0.50703616089961345], [0.68019031675911112, 0.53765909173164961], [0.63344089631648659, 0.54435119942158561], [0.67317735733202178, 0.56239550040752406], [0.72591151185357672, 0.5101929505771392], [0.68021794608340902, 0.50821770957406698], [0.63522730707207986, 0.54483388583319037], [0.69515494597691074, 0.52374099610613856], [0.66412488972527173, 0.52254823355393953], [0.73835246987439807, 0.50618471553055666], [0.71149167193162177, 0.53260161457261246], [0.65438260743552135, 0.54661702286662961], [0.70846258497049652, 0.52417427718724108], [0.68986844862130614, 0.52783535697019135], [0.6377252687547682, 0.55152096316633892], [0.64838484088639647, 0.56238751244074292], [0.69852226357237435, 0.546157630766407], [0.66608450315468415, 0.53830853641149046]
             ]
+          },
+          {
+            type: 'line',
+            name: 'Discriminant',
+            data: [[0.4, 0.5777], [1.0, 0.5777]],
+            marker: {
+              enabled: false
+            },
+            enableMouseTracking: false,
+            showInLegend: false,
+            lineWidth: 5,
+            lineColor: '#0f0'
+          },
+          {
+            type: 'line',
+            name: 'Discriminant',
+            data: [[0.7558, 0.0], [0.7558, 1.0]],
+            marker: {
+              enabled: false
+            },
+            enableMouseTracking: false,
+            showInLegend: false,
+            lineWidth: 5,
+            lineColor: 'red'
           }
       ];
 
