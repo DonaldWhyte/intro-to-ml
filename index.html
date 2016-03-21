@@ -355,8 +355,10 @@ classes.
 Of course, we need to be careful our models don't overfit our input training
 data, otherwise it will fail to correctly classify new, unseen data points.
 
-We can see on the diagram on the right, the new instance was incorrectly
-classified as a square, when it is a triangle.
+We can see on the diagram on the right, there are many unseen square instances
+that have been incorrectly classified as a triangle. The two triangles near them
+might just be outliers, but because the model was trained on a small training
+dataset, the feature space looked like it had a different structure.
 ">
             <h3>Choosing a Suitable Model</h3>
 
@@ -726,10 +728,12 @@ Show code running
           </section>
 
           <section data-notes="
-Point out the outliers on the bottom right.
+Note the cluster of vegetables on the bottom right. This is due to certain types
+of vegetables, such as peppers and tomatoes. They have an very high number o
+red and not much green.
 
-Note that this is due to certain types of vegetables, such as potatoes or
-tomoatoes without much greenery behind them.
+The decision tree is even able to handle this second cluster because of the way
+it recursively segments data space.
 ">
             <center>
               <div id="face-veg-colour-plot"></div>
@@ -737,11 +741,21 @@ tomoatoes without much greenery behind them.
           </section>
 
           <section data-notes="
-TODO: explain these features fix other issue, so use them in conjunction
+Interestly enough, there's another two features that, when used in conjunction
+tell us a lot about the images.
 
-TODO: could modify decision tree to do this
+When we plot mean saturation, the overall brightness/intesity of the image,
+again the complexity of the shapes in that image, we see a cluster where all
+the face images lie.
 
-TODO: but that might overfit the data anyway...
+Some of the trained classifiers also picked this up, and used this clustering
+in addition to the red/green features to accurately classify the images.
+
+TAKEWAY
+
+Of course, if you use every possible finding in the training data for your
+classifier, you run the risk of overfitting and failing to generalise to new
+instances.
 ">
             <center>
               <div id="face-veg-satedge-plot"></div>
@@ -844,15 +858,29 @@ spend some time building this and ensuring it's right.
               - feature extraction
               - trains models using many algorithms
               - evaluates models in a rigorous way
-            * Need to trust the harness
+            * Ensure you can trust that harness
           </section>
 
-          <section data-markdown data-notes="
-Following this process and automating it has saved me **MONTHS** of effort.
 
-It allowed me to focus on the problem instead of repetitive, manual tasks.
+          <section data-markdown data-notes="
+Following this process and automating it has saved me days, weeks, maybe even
+months of time.
+
+Time that I can use to focus on the real challenge of machine learning...
+
+...feature engineering!
+
+Focus on feature engineering:
+  * automate as much of the extraction, training and evaluation as possible
+  * then spend the extra time on determining features to use!
+  * feature engineering is far the most difficult/time-consuming stage
+  * I cannot stress that enough
 ">
-            This process has saved me **MONTHS** of effort.
+            <script type="text/template">
+              Automating this process allows me to focus on what real challenge...
+
+              ## FEATURE ENGINEERING <!-- .element: class="fragment" data-fragment-index="1" -->
+            </script>
           </section>
         </section>
 
@@ -862,13 +890,55 @@ It allowed me to focus on the problem instead of repetitive, manual tasks.
           </section>
 
           <section data-markdown>
-            TODO
+            Machine learning is all about **automation**.
+
+            It's about automatically finding patterns in data...
+
+            ...and building models to fit that data.
+
+            Models that also *generalise*.
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              Use of machine learning is **growing faster than ever**.
+
+              Soon it will be *ubiquitous*.
+
+              (it might already be there...) <!-- .element: class="small" -->
+            </script>
+          </section>
+
+          <section data-markdown>
+            Follow the five step process:
+
+            1. define problem
+            2. prepare data
+            3.  spot check algorithms
+            4. tuning
+            5. present results
+
+            Automate as much as you can.
+
+            So you can focus on **feature engineering**.
+          </section>
+
+          <section data-markdown>
+            Don't reinvent the wheel.
+
+            Use the **hundreds of tools** already there.
+          </section>
+
+          <section data-markdown>
+            ### Tools
+
+            Use the TODO
           </section>
 
           <section data-markdown>
             ### Useful Resources
 
-            TODO
+            Use the TODO
           </section>
 
           <section>
@@ -1021,10 +1091,10 @@ sponsor, then get in touch!
             },
             color: 'rgba(223, 83, 83, 1)',
             data: [
-              [3.7, 0.9], [4.2, 1.2],
-              [3.7, 0.9], [4.2, 1.2],
-              [3.7, 0.9], [4.2, 1.2],
-              [3.7, 0.9], [4.2, 1.2]
+              [3.7, 0.9], [3.9, 1.7],
+              [3.9, 0.9], [4.2, 1.2],
+              [3.5, 1.4], [3.85, 1.3],
+              [3.4, 1.0], [3.7, 1.25]
             ]
           }, {
             name: 'Triangle',
@@ -1034,9 +1104,14 @@ sponsor, then get in touch!
             color: 'rgba(119, 152, 191, 1)',
             data: [
               [2.75, 0.18], [3.2, 0.22],
-              [2.75, 0.18], [3.2, 0.22],
-              [2.75, 0.18], [3.2, 0.22],
-              [2.75, 0.18], [3.2, 0.22]
+              [4.2, 0.65], [4.1, 0.20],
+              [3.5, 0.4], [4.0, 0.24],
+              [4.15, 0.5], [3.8, 0.5],
+              [2.8, 0.6], [3.8, 0.5],
+              [3.0, 0.8], [2.7, 1.4],
+              [3.1, 0.5], [2.8, 1.3],
+              [2.7, 1.1], [2.8, 0.9],
+              [3.15, 1.25], [3.5, 1.9]
             ]
           }
         ]
@@ -1046,7 +1121,7 @@ sponsor, then get in touch!
       shapeChartWithDiscriminant["series"].push({
         type: 'line',
         name: 'Discriminant',
-        data: [[2.5, 0.4], [4.5, 0.7]],
+        data: [[4.2, 0.1], [2.8, 1.9]],
         marker: {
           enabled: false
         },
@@ -1057,10 +1132,29 @@ sponsor, then get in touch!
       });
 
       var shapeChartComplex = jQuery.extend(true, {}, shapeChart);
-      // TODO
+      shapeChartComplex['series'].push({
+        type: 'spline',
+        name: 'Discriminant',
+        data: [[3.65, 1.9], [3.2, 1.0], [3.5, 0.65], [4.2, 0.8]],
+        marker: {
+          enabled: false
+        },
+        enableMouseTracking: false,
+        showInLegend: false,
+        lineWidth: 5,
+        lineColor: 'white'
+      });
 
-      var shapeChartOverfitting = jQuery.extend(true, {}, shapeChart);
-      // TODO
+      var shapeChartOverfitting = jQuery.extend(true, {}, shapeChartComplex);
+      shapeChartOverfitting['series'].push({
+        name: 'Square-Wrong',
+        marker: {
+          symbol: 'square'
+        },
+        color: '#0f0',
+        showInLegend: false,
+        data: [ [3.35, 1.75], [3.2, 1.7], [3.4, 1.5], [3.1, 1.5], [3.3, 1.55] ]
+      });
 
       var faceVegChartBase = jQuery.extend(true, {}, shapeChart);
       faceVegChartBase.legend = {
