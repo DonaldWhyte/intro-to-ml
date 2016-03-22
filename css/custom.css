@@ -46,6 +46,23 @@ p.small {
     clear: both;
 }
 
+.reveal th {
+    font-size: 26px;
+}
+
+.reveal td {
+    font-size: 26px;
+}
+
+.large-table th {
+    font-size: 40px;
+}
+
+.large-table td {
+    font-size: 40px;
+}
+
+
 /* Experience */
 
 img[alt="bloomberg"] {
@@ -63,7 +80,7 @@ img[alt="ibm"] {
 }
 
 img[alt="helper.io"] {
-    width: 130px;
+    width: 85px;
 }
 
 /* Title */
@@ -135,6 +152,23 @@ img[alt="venn diagram"] {
     width: 450px;
 }
 
+img[alt="k fold cross validation"] {
+    margin-bottom: 0px;
+}
+
+/* Problem */
+
+img[alt="face-veg-img"] {
+    height: 130px;
+    margin-right: 32px;
+}
+
+/* Prepare Data */
+
+img[alt="sobel edge detection"] {
+    width: 750px;
+}
+
 /* Spot Check Algorithms */
 
 #linear-data-space-container {
@@ -155,6 +189,23 @@ img[alt="arbitrary data space"] {
 
 img[alt="neural network"] {
     width: 300px;
+}
+
+img[alt="face veg decision tree"] {
+    width: 650px;
+}
+
+#face-veg-colour-plot {
+    width: 600px;
+}
+
+#face-veg-satedge-plot {
+    width: 600px;
+}
+
+img[alt="sklearn"] {
+    width: 200px;
+    margin-left: 32px !important;
 }
 
 /* Process Summary */

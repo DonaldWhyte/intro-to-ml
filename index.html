@@ -162,7 +162,11 @@ toucing more and more.
 ">
           </section>
 
-          <section data-markdown>
+          <section data-markdown data-notes="
+And we can see this when we look at machine learning adoption metrics.
+
+TODO
+">
           ### Growth in Adoption
 
           TODO: stats on increasing adoption in both academia, industry and government
@@ -184,7 +188,7 @@ toucing more and more.
 
           <section data-markdown data-notes="
 One thing to thing before I move on is the difference between data mining,
-machine learning and statistics, since I've seen people
+machine learning and statistics, since I've seen people confuse these terms.
 
 Data mining applies methods from many different areas to identify previously
 unknown patterns from data. This can include statistical algorithms,
@@ -192,11 +196,13 @@ machine learning, text analytics, time series analysis and so on. Data mining
 also includes the study and practice of data storage and data manipulation.
 
 Machine learning is a *category* of data mining that uses automated and
-iterative algorithms to learn patterns in data. Machine learning focuses on
-algorithms that learn from data with **minimal human intervention**.
+iterative algorithms to learn patterns in data.
 
-Statistics is a vital tool used by both data mining and machine learning,
-but again, it's not the same thing.
+Machine learning focuses on algorithms that learn from data with
+**minimal human intervention**.
+
+Statistics is field of study that provides techniques used by both data mining
+and machine learning, but again, it's not the same thing.
 
 The key is that machine learning's focus is on *automating* pattern recognition,
 which is what makes it different to the other two fields.
@@ -324,8 +330,7 @@ chekcing which region the vector is mapped to.
                 <li>Training data is used to produce a model</li>
                 <li> f(x&#x0304;) = mx&#x0304; + c </li>
                 <li>Model divides feature space into segments</li>
-                <li>Each segment of the divided space corresponds to one
-                    <strong>output class</strong></li>
+                <li>Each segment corresponds to one <strong>output class</strong></li>
               </ul>
             </div>
 
@@ -343,15 +348,17 @@ chekcing which region the vector is mapped to.
           </section>
 
           <section data-notes="
-Now in reality, your data might not be linearly seperable, so we have to use
-a more complex model to correctly discriminate between the different output
+Now in reality, your data might not be linearly seperable, so we might have to
+use a more complex model to correctly discriminate between the different output
 classes.
 
 Of course, we need to be careful our models don't overfit our input training
 data, otherwise it will fail to correctly classify new, unseen data points.
 
-We can see on the diagram on the right, the new instance was incorrectly
-classified as a square, when it is a triangle.
+We can see on the diagram on the right, there are many unseen square instances
+that have been incorrectly classified as a triangle. The two triangles near them
+might just be outliers, but because the model was trained on a small training
+dataset, the feature space looked like it had a different structure.
 ">
             <h3>Choosing a Suitable Model</h3>
 
@@ -367,13 +374,68 @@ classified as a square, when it is a triangle.
             </div>
           </section>
 
-          <section data-markdown data-notes="
-So for example, you would use classification to predict what type of animal is
-in a picture. Generally, you would pre-define the output classes (e.g. cat, dog,
-pidgeon) and construct a model that uses those classifiers.
+          <section data-markdown>
+            ### Evaluation
 
-If you wanted to predict the lifetime of a human, based on some attributes
-about their lifestyle and current health, then you would use regression.
+            * Many ways to evaluate
+              - overall accuracy, number of false positives, etc.
+            * Depends on what problem you're trying to solve
+              - are false positive acceptable?
+            * `k`-fold cross validation commonly used
+          </section>
+
+          <section data-markdown data-notes="
+Unless the problem you're trying to solve has specific requirements, just
+using overall classification accuracy is reasonable.
+
+However, you shouldn't just use your training dataset to evaluate the accuracy
+of your classifier. As I showed previously, trained models might overfit
+their training data and not classify new, unseen data points correctly.
+
+We want classifiers that generalise and behave correctly *even* with unseen
+instances. This can be achieved by splitting the training dataset into two:
+
+* training -- used to learn the model
+* testing -- used for evaluating model's accuracy on data it hasn't seen
+
+Doing this just once means that we're not using all of our data points for
+training. What if those points capture some essential structure in the data?
+
+We can test using unseen data points and ensure all points are considered for
+training by using K-FOLD CROSS VALIDATION.
+
+With k-fold cross validation, we train a model and tests it *k* times. In each
+iteration, the full dataset is split into training and test sets, but the split
+is different each time.
+
+[HIGHLIGHT DIAGRMA AND EXPLAIN EXAMPLE]
+
+This technique is very common and is good starting point for those unfamiliar
+with applying machine learning.
+">
+            ![k fold cross validation](images/k-fold-cross-validation.svg)
+
+            * testing accuracy just using the training dataset is bad
+            * classifier should generalise to unseen data points
+            * split training data into two sets
+              - one for training
+              - one for testing
+            * perform this process *k* times using different splits
+          </section>
+
+          <section data-markdown data-notes="
+One thing to mention is that I've been focusing on classification here, instead
+of regression. All of the outputs I've discussed have been from discrete, finite
+sets.
+
+You would use classification to predict what type of animal is in a picture.
+Generally, you would pre-define the output classes (e.g. cat, dog, pidgeon)
+and construct a model that uses those classifiers.
+
+Supervised learning can produce models that output continuous values, in which
+case we train regression models instead. If you wanted to predict the lifetime
+of a human, based on some attributes about their lifestyle and current health,
+then you would use regression.
 ">
             ### Discrete or Continuous?
 
@@ -383,6 +445,7 @@ about their lifestyle and current health, then you would use regression.
             * Regression
               - output is a real number from a continuous range
           </section>
+
 
           <section data-markdown data-notes="
 The point I'm trying to make here is that machine learning really just boils
@@ -399,11 +462,12 @@ time to extract, and are not redundant (tell us the same thing as other features
               2. choosing a suitable model type <!-- .element: class="fragment" data-fragment-index="2" -->
               3. collecting a comprehensive training dataset <!-- .element: class="fragment" data-fragment-index="3" -->
               4. training the chosen model type on the training dataset <!-- .element: class="fragment" data-fragment-index="4" -->
-              5. using trained model to label new, unseed inputs <!-- .element: class="fragment" data-fragment-index="5" -->
+              5. carefully evaluating model before deploying <!-- .element: class="fragment" data-fragment-index="5" -->
+              5. using model to label new, unseed inputs in production <!-- .element: class="fragment" data-fragment-index="6" -->
 
               <div style="height: 60px"></div>
 
-              #### Doing this in a SYSTEMATIC way! <!-- .element: class="fragment" data-fragment-index="6" -->
+              #### Doing this in a SYSTEMATIC way! <!-- .element: class="fragment" data-fragment-index="7" -->
             </script>
           </section>
 
@@ -451,8 +515,22 @@ good solutions faster.
             * how will users/systems be affected by your model?
           </section>
 
-          <section data-markdown>
-            TODO: introduce example problem!
+          <section data-markdown class="large-table">
+### Faces vs Vegetables
+
+![face-veg-img](demo/data/face1.jpg)
+![face-veg-img](demo/data/vegetable1.jpg)
+![face-veg-img](demo/data/face5.jpg)
+![face-veg-img](demo/data/vegetable10.jpg)
+![face-veg-img](demo/data/vegetable19.jpg)
+![face-veg-img](demo/data/vegetable7.jpg)
+
+|             |                    |
+| ----------- | ------------------ |
+| **Input:**  | image (rgb pixels) |
+| **Output:** | face or vegetable  |
+
+
           </section>
 
           <section data-markdown>
@@ -469,23 +547,47 @@ good solutions faster.
           </section>
 
           <section data-markdown>
-            ### Data Sources
+            ### Data Source
 
-            TODO: define data sources
+            * 40 images
+              - 20 faces
+              - 20 vegetables
+            * manually labelled by a friend
+              - who we trust
+          </section>
+
+          <section data-markdown data-notes="
+Use quick and easy features to extract so we can get some classification going.
+">
+            ### Features to Extract from Images
+
+            * average intensity of each colour channel across all pixels
+              - red, green, blue
+            * average saturation across all pixels
+              - bright and strong colours
+          </section>
+
+          <section data-markdown data-notes="
+Previous features are summary statistics that only take colour into
+consideration. Let's another feature, this time one related to the shapes in the
+images.
+">
+            ![sobel edge detection](images/sobel-edge-detection.png)
+
+            * how about the complexity of the images?
+            * more complicated shapes have more edge pixels
+            * feature:
+              - proportion of pixels are 'edge pixels'
+            * **sobel edge detection** used to find edge pixels
           </section>
 
           <section data-markdown>
-            ### Coalescing and Scrubbing Data
-
-            TODO: define tools I used to scrub data
-
-            TODO: and what I scrubbed
-          </section>
-
-          <section data-markdown>
-            ### Feature Selection
-
-            TODO: Python tools for doing it
+            1. mean red colour
+            2. mean green colour
+            3. mean blue colour
+            4. mean saturation
+            5. edge pixel ratio
+              - \# edge pixels / \# total pixels
           </section>
 
           <section data-markdown>
@@ -588,16 +690,76 @@ which we'll leave out of this talk!
             <script type="text/template">
               #### End Result
 
-              A list of all commonly used algorithms ranked by accuracy
+              A list of all algorithms ranked by accuracy
 
-              (add some rarer algorithms in there too) <!-- .element: class="small" -->
+              (include some rarer algorithms in there too) <!-- .element: class="small" -->
             </script>
           </section>
 
           <section data-markdown data-notes="
 Show code running
 ">
-            TODO: tools and automate
+            ### Let's try it out!
+
+            ![python](images/python.svg)
+            ![sklearn](images/sklearn.svg)
+
+            * Python
+            * scikit-learn
+            * Could also use:
+              * Pylearn2, MILK, Theano, ...
+          </section>
+
+          <section data-markdown>
+| Classifier               | Mean Acc. | Confidence Interval | Lower Bound Acc |
+| ------------------------ | --------- | ------------------- | --------------- |
+| Gaussian Naive Bayes     | 0.975     | 0.15                | 0.825           |
+| Decision Tree            | 0.95      | 0.2                 | 0.75            |
+| Multi-Nomial Naive Bayes | 0.85      | 0.331662            | 0.518338        |
+| SVM                      | 0.775     | 0.415331            | 0.359669        |
+| Neural Network (Sigmoid) | 0.525     | 0.269258            | 0.255742        |
+| Bernoulli Naive Bayes    | 0.5       | 0                   | 0.5             |
+          </section>
+
+          <section data-markdown>
+            Decision tree had good performance
+
+            ![face veg decision tree](images/face-veg-decision-tree.svg)
+          </section>
+
+          <section data-notes="
+Note the cluster of vegetables on the bottom right. This is due to certain types
+of vegetables, such as peppers and tomatoes. They have an very high number o
+red and not much green.
+
+The decision tree is even able to handle this second cluster because of the way
+it recursively segments data space.
+">
+            <center>
+              <div id="face-veg-colour-plot"></div>
+            </center>
+          </section>
+
+          <section data-notes="
+Interestly enough, there's another two features that, when used in conjunction
+tell us a lot about the images.
+
+When we plot mean saturation, the overall brightness/intesity of the image,
+again the complexity of the shapes in that image, we see a cluster where all
+the face images lie.
+
+Some of the trained classifiers also picked this up, and used this clustering
+in addition to the red/green features to accurately classify the images.
+
+TAKEWAY
+
+Of course, if you use every possible finding in the training data for your
+classifier, you run the risk of overfitting and failing to generalise to new
+instances.
+">
+            <center>
+              <div id="face-veg-satedge-plot"></div>
+            </center>
           </section>
 
           <section data-markdown>
@@ -696,15 +858,29 @@ spend some time building this and ensuring it's right.
               - feature extraction
               - trains models using many algorithms
               - evaluates models in a rigorous way
-            * Need to trust the harness
+            * Ensure you can trust that harness
           </section>
 
-          <section data-markdown data-notes="
-Following this process and automating it has saved me **MONTHS** of effort.
 
-It allowed me to focus on the problem instead of repetitive, manual tasks.
+          <section data-markdown data-notes="
+Following this process and automating it has saved me days, weeks, maybe even
+months of time.
+
+Time that I can use to focus on the real challenge of machine learning...
+
+...feature engineering!
+
+Focus on feature engineering:
+  * automate as much of the extraction, training and evaluation as possible
+  * then spend the extra time on determining features to use!
+  * feature engineering is far the most difficult/time-consuming stage
+  * I cannot stress that enough
 ">
-            This process has saved me **MONTHS** of effort.
+            <script type="text/template">
+              Automating this process allows me to focus on what real challenge...
+
+              ## FEATURE ENGINEERING <!-- .element: class="fragment" data-fragment-index="1" -->
+            </script>
           </section>
         </section>
 
@@ -714,13 +890,55 @@ It allowed me to focus on the problem instead of repetitive, manual tasks.
           </section>
 
           <section data-markdown>
-            TODO
+            Machine learning is all about **automation**.
+
+            It's about automatically finding patterns in data...
+
+            ...and building models to fit that data.
+
+            Models that also *generalise*.
+          </section>
+
+          <section data-markdown>
+            <script type="text/template">
+              Use of machine learning is **growing faster than ever**.
+
+              Soon it will be *ubiquitous*.
+
+              (it might already be there...) <!-- .element: class="small" -->
+            </script>
+          </section>
+
+          <section data-markdown>
+            Follow the five step process:
+
+            1. define problem
+            2. prepare data
+            3.  spot check algorithms
+            4. tuning
+            5. present results
+
+            Automate as much as you can.
+
+            So you can focus on **feature engineering**.
+          </section>
+
+          <section data-markdown>
+            Don't reinvent the wheel.
+
+            Use the **hundreds of tools** already there.
+          </section>
+
+          <section data-markdown>
+            ### Tools
+
+            Use the TODO
           </section>
 
           <section data-markdown>
             ### Useful Resources
 
-            TODO
+            Use the TODO
           </section>
 
           <section>
@@ -769,7 +987,6 @@ sponsor, then get in touch!
 
     <script src="lib/js/jquery-latest.min.js"></script>
     <script src="lib/js/highcharts.js"></script>
-    <script src="lib/js/regression.js"></script>
 
     <script>
 
@@ -790,8 +1007,7 @@ sponsor, then get in touch!
           { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
           { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
           { src: 'plugin/zoom-js/zoom.js', async: true },
-          { src: 'plugin/notes/notes.js', async: true },
-          { src: 'plugin/reveal.js-fullscreen-img/fullscreen-img.js' }
+          { src: 'plugin/notes/notes.js', async: true }
         ]
       });
 
@@ -875,10 +1091,10 @@ sponsor, then get in touch!
             },
             color: 'rgba(223, 83, 83, 1)',
             data: [
-              [3.7, 0.9], [4.2, 1.2],
-              [3.7, 0.9], [4.2, 1.2],
-              [3.7, 0.9], [4.2, 1.2],
-              [3.7, 0.9], [4.2, 1.2]
+              [3.7, 0.9], [3.9, 1.7],
+              [3.9, 0.9], [4.2, 1.2],
+              [3.5, 1.4], [3.85, 1.3],
+              [3.4, 1.0], [3.7, 1.25]
             ]
           }, {
             name: 'Triangle',
@@ -888,9 +1104,14 @@ sponsor, then get in touch!
             color: 'rgba(119, 152, 191, 1)',
             data: [
               [2.75, 0.18], [3.2, 0.22],
-              [2.75, 0.18], [3.2, 0.22],
-              [2.75, 0.18], [3.2, 0.22],
-              [2.75, 0.18], [3.2, 0.22]
+              [4.2, 0.65], [4.1, 0.20],
+              [3.5, 0.4], [4.0, 0.24],
+              [4.15, 0.5], [3.8, 0.5],
+              [2.8, 0.6], [3.8, 0.5],
+              [3.0, 0.8], [2.7, 1.4],
+              [3.1, 0.5], [2.8, 1.3],
+              [2.7, 1.1], [2.8, 0.9],
+              [3.15, 1.25], [3.5, 1.9]
             ]
           }
         ]
@@ -900,7 +1121,7 @@ sponsor, then get in touch!
       shapeChartWithDiscriminant["series"].push({
         type: 'line',
         name: 'Discriminant',
-        data: [[2.5, 0.4], [4.5, 0.7]],
+        data: [[4.2, 0.1], [2.8, 1.9]],
         marker: {
           enabled: false
         },
@@ -911,16 +1132,121 @@ sponsor, then get in touch!
       });
 
       var shapeChartComplex = jQuery.extend(true, {}, shapeChart);
-      // TODO
+      shapeChartComplex['series'].push({
+        type: 'spline',
+        name: 'Discriminant',
+        data: [[3.65, 1.9], [3.2, 1.0], [3.5, 0.65], [4.2, 0.8]],
+        marker: {
+          enabled: false
+        },
+        enableMouseTracking: false,
+        showInLegend: false,
+        lineWidth: 5,
+        lineColor: 'white'
+      });
 
-      var shapeChartOverfitting = jQuery.extend(true, {}, shapeChart);
-      // TODO
+      var shapeChartOverfitting = jQuery.extend(true, {}, shapeChartComplex);
+      shapeChartOverfitting['series'].push({
+        name: 'Square-Wrong',
+        marker: {
+          symbol: 'square'
+        },
+        color: '#0f0',
+        showInLegend: false,
+        data: [ [3.35, 1.75], [3.2, 1.7], [3.4, 1.5], [3.1, 1.5], [3.3, 1.55] ]
+      });
+
+      var faceVegChartBase = jQuery.extend(true, {}, shapeChart);
+      faceVegChartBase.legend = {
+      layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            floating: true,
+            backgroundColor: '#333',
+            borderWidth: 2,
+            borderColor: 'white',
+            itemStyle: {
+              color: 'white',
+              fontWeight: 'bold',
+              fontSize: '20px'
+            }
+      };
+
+      var faceVegColourChart = jQuery.extend(true, {}, faceVegChartBase);
+      faceVegColourChart.xAxis.title.text = 'Mean Red';
+      faceVegColourChart.yAxis.title.text = 'Mean Green';
+      faceVegColourChart.yAxis.min = 0.0;
+      faceVegColourChart.yAxis.max = 1.0;
+
+
+      faceVegColourChart.series = [
+          {
+            name: 'Vegetable',
+            color: 'green',
+            data: [
+[0.62825796545311896, 0.67994890219101178], [0.44222595103724671, 0.8204201249170765], [0.58531128491113704, 0.60324521170415235], [0.58041854550606531, 0.63824607479961559], [0.57659280234518728, 0.69729520178836824], [0.59159659922631813, 0.74551419390888884], [0.52946670196963042, 0.71172928052486994], [0.56342968877925348, 0.69473812318093642], [0.77320474934562655, 0.55440175620347742], [0.78059456270452332, 0.50696818313432157], [0.57516649303966305, 0.60508085282821944], [0.8092456798311054, 0.52960216894278223], [0.82423365222562373, 0.53526313538121428], [0.5923025309029224, 0.71851102768489361], [0.5349588901652591, 0.7084497463999504], [0.98126442717469198, 0.17893584103921623], [0.54883891504355209, 0.67890105313957672], [0.58414058069203412, 0.59291046684661053], [0.58717648603601202, 0.65362052267769277], [0.64072049500710948, 0.73107086895513762]
+            ]
+          },
+          {
+            name: 'Face',
+            color: 'salmon',
+            data: [
+[0.64335456631161725, 0.54833413478957149], [0.63075130927072298, 0.53215338327208184], [0.61661732290582316, 0.50703616089961345], [0.68019031675911112, 0.53765909173164961], [0.63344089631648659, 0.54435119942158561], [0.67317735733202178, 0.56239550040752406], [0.72591151185357672, 0.5101929505771392], [0.68021794608340902, 0.50821770957406698], [0.63522730707207986, 0.54483388583319037], [0.69515494597691074, 0.52374099610613856], [0.66412488972527173, 0.52254823355393953], [0.73835246987439807, 0.50618471553055666], [0.71149167193162177, 0.53260161457261246], [0.65438260743552135, 0.54661702286662961], [0.70846258497049652, 0.52417427718724108], [0.68986844862130614, 0.52783535697019135], [0.6377252687547682, 0.55152096316633892], [0.64838484088639647, 0.56238751244074292], [0.69852226357237435, 0.546157630766407], [0.66608450315468415, 0.53830853641149046]
+            ]
+          },
+          {
+            type: 'line',
+            name: 'Discriminant',
+            data: [[0.4, 0.5777], [1.0, 0.5777]],
+            marker: {
+              enabled: false
+            },
+            enableMouseTracking: false,
+            showInLegend: false,
+            lineWidth: 5,
+            lineColor: '#0f0'
+          },
+          {
+            type: 'line',
+            name: 'Discriminant',
+            data: [[0.7558, 0.0], [0.7558, 1.0]],
+            marker: {
+              enabled: false
+            },
+            enableMouseTracking: false,
+            showInLegend: false,
+            lineWidth: 5,
+            lineColor: 'red'
+          }
+      ];
+
+      var faceVegSatEdgeChart = jQuery.extend(true, {}, faceVegChartBase);
+      faceVegSatEdgeChart.xAxis.title.text = 'Mean Saturation';
+      faceVegSatEdgeChart.yAxis.title.text = 'Edge Pixel Ratio';
+      faceVegSatEdgeChart.series = [
+          {
+            name: 'Vegetable',
+            color: 'green',
+            data: [
+[0.59593200000000002, 0.67122499999999996], [0.70201499999999994, 0.57808000000000004], [0.17555899999999999, 0.42407400000000001], [0.322714, 0.55174500000000004], [0.53980799999999995, 0.76991399999999999], [0.65932000000000002, 0.81395300000000004], [0.417043, 0.86703300000000005], [0.42941299999999999, 0.77066400000000002], [0.654586, 0.54507499999999998], [0.59687400000000002, 0.81956200000000001], [0.234067, 0.35811199999999999], [0.75917800000000002, 0.55525400000000003], [0.77804700000000004, 0.48641800000000002], [0.59282800000000002, 0.75765300000000002], [0.48323199999999999, 0.18110200000000001], [0.93068700000000004, 0.15890799999999999], [0.35638999999999998, 0.63439999999999996], [0.119183, 0.10445699999999999], [0.387656, 0.52646599999999999], [0.656169, 0.48806699999999997]
+            ]
+          },
+          {
+            name: 'Face',
+            color: 'salmon',
+            data: [
+[0.209062, 0.15003], [0.20863599999999999, 0.38819399999999998], [0.21088000000000001, 0.33875499999999997], [0.28626299999999999, 0.26505800000000002], [0.18093100000000001, 0.389428], [0.29617100000000002, 0.40819699999999998], [0.37652799999999997, 0.122555], [0.31248500000000001, 0.16249], [0.19806499999999999, 0.34207700000000002], [0.316467, 0.21126800000000001], [0.25652000000000003, 0.24348800000000001], [0.43935099999999999, 0.43424499999999999], [0.38750400000000002, 0.33570800000000001], [0.25747999999999999, 0.40101100000000001], [0.35791299999999998, 0.27700000000000002], [0.30728699999999998, 0.10234699999999999], [0.22576599999999999, 0.146427], [0.26536599999999999, 0.29931799999999997], [0.38230500000000001, 0.312276], [0.239536, 0.366562]
+            ]
+          }
+      ];
 
       $(function () {
         $('#shape-plot').highcharts(shapeChart);
         $('#shape-plot-discriminant').highcharts(shapeChartWithDiscriminant);
         $('#shape-plot-complex').highcharts(shapeChartComplex);
         $('#shape-plot-overfitting').highcharts(shapeChartOverfitting);
+        $('#face-veg-colour-plot').highcharts(faceVegColourChart);
+        $('#face-veg-satedge-plot').highcharts(faceVegSatEdgeChart);
       });
     </script>
 
