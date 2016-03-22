@@ -214,6 +214,23 @@ img[alt="process"]  {
     width: 700px;
 }
 
+/* Tools */
+img[alt="r"] {
+    width: 140px;
+}
+
+img[alt="scala"] {
+    width: 90px;
+}
+
+img[alt="java"] {
+    width: 110px;
+}
+
+img[alt="spark"] {
+    width: 200px;
+}
+
 /* Get in Touch */
 
 .donald {
