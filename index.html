@@ -702,6 +702,37 @@ CODE EXAMPLE
           </section>
 
           <section data-markdown>
+```
+from sklearn import svm
+from sklearn import tree
+from sklearn import naive_bayes
+
+classifiers = {
+    'SVM':
+        svm.SVC(kernel='linear', C=1),
+    'Decision Tree':
+        tree.DecisionTreeClassifier(criterion='gini', split='best'),
+    'Gaussian Naive Bayes':
+        naive_bayes.GaussianNB(),
+
+    ...
+}
+```
+          </section>
+
+          <section data-markdown>
+```
+from sklearn import preprocessing
+from sklearn import cross_validation
+
+featureVecs = preprocessing.normalize(featureVectors)
+
+cross_validation.cross_val_score(
+        classifier, featureVectors, labels, cv=kFolds)
+```
+          </section>
+
+          <section data-markdown>
 | Classifier               | Mean Acc. | Confidence Interval | Lower Bound Acc |
 | ------------------------ | --------- | ------------------- | --------------- |
 | Gaussian Naive Bayes     | 0.975     | 0.15                | 0.825           |
