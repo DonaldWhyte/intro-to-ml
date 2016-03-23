@@ -7,7 +7,7 @@
     <title>Introduction to Machine Learning -- A Whirlwind Tour</title>
 
     <meta name="description"
-          content="High-level introduction to machine learning and the practical process of applying it to solve problems">
+          content="High-level introduction to machine learning and the practical process of applying it to solve industry problems">
     <meta name="author" content="Dinald Whyte">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -699,6 +699,37 @@ CODE EXAMPLE
             * scikit-learn
             * Could also use:
               * Pylearn2, MILK, Theano, ...
+          </section>
+
+          <section data-markdown>
+```
+from sklearn import svm
+from sklearn import tree
+from sklearn import naive_bayes
+
+classifiers = {
+    'SVM':
+        svm.SVC(kernel='linear', C=1),
+    'Decision Tree':
+        tree.DecisionTreeClassifier(criterion='gini', split='best'),
+    'Gaussian Naive Bayes':
+        naive_bayes.GaussianNB(),
+
+    ...
+}
+```
+          </section>
+
+          <section data-markdown>
+```
+from sklearn import preprocessing
+from sklearn import cross_validation
+
+featureVecs = preprocessing.normalize(featureVectors)
+
+cross_validation.cross_val_score(
+        classifier, featureVectors, labels, cv=kFolds)
+```
           </section>
 
           <section data-markdown>
