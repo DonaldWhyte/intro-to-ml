@@ -811,10 +811,129 @@ models.
             #### Squeeze out Remaining Performance
 
             1. algorithm tuning
-              - tune parameters of each algorithm for better accuracy
+              - tune each algorithm for better accuracy
+              - search hyperparameter space
             2. ensembles
               - combine multiple 'okay' models into one, better model
             3. feature refinement
+          </section>
+
+          <section data-markdown>
+            #### Hyperparameter Optimisation
+
+            * Learn model **parameters**
+            * Must set model's **hyperparameters** before training
+            * Tune performance by searching hyperparameter space
+
+            ![hyperparameter_optimisation](images/hyperparameter_optimisation.jpg)
+          </section>
+
+          <section data-markdown>
+            [**auto_sklearn**](https://github.com/automl/auto-sklearn)
+
+            Library on top of `sklearn`
+
+            Automates the spot check and tuning stages
+          </section>
+
+          <section data-markdown>
+          Automatically build ensemble of models
+
+          Learns best model types and hyperparameters for you
+
+          It's as easy as:
+
+          ```python
+# Train classifier for up to two minutes.
+# Longer training time, better accuracy (in general).
+autoClassifier = autosklearn.classification.AutoSklearnClassifier(
+    time_left_for_this_task=120)
+autoClassifier.fit(trainingFeatures, trainingLabels)
+
+# Output accuracy of classifier when run against test dataset.
+print(autoClassifier.score(testFeatures, testLabels))
+print(autoClassifier.show_models())
+          ```
+          </section>
+
+          <section data-markdown data-notes="
+adaboost = Adaptive Boosting
+proj_logit = Logistic Regresion using Least Squares
+passive_aggressive = passive aggresive classifier
+
+Ensemble of classifers:
+[
+  (weight, classifier),
+  (weight, classifier),
+  ...
+]
+">
+          ```
+Score: 0.987452948557
+[(0.940000, SimpleClassificationPipeline(configuration={
+  'balancing:strategy': 'none',
+  'classifier:__choice__': 'adaboost',
+  'classifier:adaboost:algorithm': 'SAMME',
+  'classifier:adaboost:learning_rate': 1.2306208006800998,
+  'classifier:adaboost:max_depth': 6,
+  'classifier:adaboost:n_estimators': 499,
+  'imputation:strategy': 'median',
+  'one_hot_encoding:use_minimum_fraction': 'False',
+  'preprocessor:__choice__': 'extra_trees_preproc_for_classification',
+  'preprocessor:extra_trees_preproc_for_classification:bootstrap': 'True',
+  'preprocessor:extra_trees_preproc_for_classification:criterion': 'entropy',
+  'preprocessor:extra_trees_preproc_for_classification:max_depth': 'None',
+  'preprocessor:extra_trees_preproc_for_classification:max_features': 3.5347851525007146,
+  'preprocessor:extra_trees_preproc_for_classification:min_samples_leaf': 6,
+  'preprocessor:extra_trees_preproc_for_classification:min_samples_split': 8,
+  'preprocessor:extra_trees_preproc_for_classification:min_weight_fraction_leaf': 0.0,
+  'preprocessor:extra_trees_preproc_for_classification:n_estimators': 100,
+  'rescaling:__choice__': 'standardize'})),
+(0.020000, SimpleClassificationPipeline(configuration={
+  'balancing:strategy': 'none',
+  'classifier:__choice__': 'adaboost',
+  'classifier:adaboost:algorithm': 'SAMME',
+  'classifier:adaboost:learning_rate': 1.0081104516473922,
+  'classifier:adaboost:max_depth': 6,
+  'classifier:adaboost:n_estimators': 468,
+  'imputation:strategy': 'mean',
+  'one_hot_encoding:use_minimum_fraction': 'False',
+  'preprocessor:__choice__': 'liblinear_svc_preprocessor',
+  'preprocessor:liblinear_svc_preprocessor:C': 1.1828431725901418,
+  'preprocessor:liblinear_svc_preprocessor:dual': 'False',
+  'preprocessor:liblinear_svc_preprocessor:fit_intercept': 'True',
+  'preprocessor:liblinear_svc_preprocessor:intercept_scaling': 1,
+  'preprocessor:liblinear_svc_preprocessor:loss': 'squared_hinge',
+  'preprocessor:liblinear_svc_preprocessor:multi_class': 'ovr',
+  'preprocessor:liblinear_svc_preprocessor:penalty': 'l1',
+  'preprocessor:liblinear_svc_preprocessor:tol': 0.0022792606924326923,
+  'rescaling:__choice__': 'min/max'})),
+(0.020000, SimpleClassificationPipeline(configuration={
+  'balancing:strategy': 'weighting',
+  'classifier:__choice__': 'proj_logit',
+  'classifier:proj_logit:max_epochs': 11,
+  'imputation:strategy': 'median',
+  'one_hot_encoding:minimum_fraction': 0.002883367159521145,
+  'one_hot_encoding:use_minimum_fraction': 'True',
+  'preprocessor:__choice__': 'gem',
+  'preprocessor:gem:N': 16,
+  'preprocessor:gem:precond': 0.30628439346357783,
+  'rescaling:__choice__': 'standardize'})),
+(0.020000, SimpleClassificationPipeline(configuration={
+  'balancing:strategy': 'weighting',
+  'classifier:__choice__': 'passive_aggressive',
+  'classifier:passive_aggressive:C': 0.0036975653885940544,
+  'classifier:passive_aggressive:fit_intercept': 'True',
+  'classifier:passive_aggressive:loss': 'hinge',
+  'classifier:passive_aggressive:n_iter': 326,
+  'imputation:strategy': 'mean',
+  'one_hot_encoding:use_minimum_fraction': 'False',
+  'preprocessor:__choice__': 'kitchen_sinks',
+  'preprocessor:kitchen_sinks:gamma': 0.6227804363658538,
+  'preprocessor:kitchen_sinks:n_components': 1821,
+  'rescaling:__choice__': 'normalize'})),
+]
+          ```
           </section>
 
           <section data-markdown data-notes="
@@ -877,7 +996,6 @@ spend some time building this and ensuring it's right.
               - evaluates models in a rigorous way
             * Ensure you can trust that harness
           </section>
-
 
           <section data-markdown data-notes="
 Following this process and automating it has saved me days, weeks, maybe even
@@ -1011,14 +1129,16 @@ INTRO TO ML W/ SKLEARN:
             [Jason Brownlee's Process](http://machinelearningmastery.com/process-for-working-through-machine-learning-problems/)
 
             [Introduction to Machine Learning with sci-kit Learn](http://scikit-learn.org/stable/tutorial/basic/tutorial.html)
+
+            [Efficient and Robust Automated Machine Learning](https://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf)
           </section>
 
           <section data-markdown>
             ### This Presentation
 
-            [donaldwhyte.github.io/intro-to-ml](http://donaldwhyte.github.io/intro-to-ml)
+            [donaldwhyte.github.io/intro-to-ml/automated](http://donaldwhyte.github.io/intro-to-ml/automated)
 
-            [github.com/DonaldWhyte/intro-to-ml](http://github.com/DonaldWhyte/intro-to-ml)
+            [github.com/DonaldWhyte/intro-to-ml/](http://github.com/DonaldWhyte/intro-to-ml)
 
           </section>
 

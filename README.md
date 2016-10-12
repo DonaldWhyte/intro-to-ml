@@ -32,3 +32,19 @@ grunt serve
 ```
 
 The presentation can now be accessed on `localhost:8080`. Note that this web application is configured to bind to hostname `0.0.0.0`, which means that once the Grunt server is running, it will be accessible from external hosts as well (using the current host's public IP address).
+
+## Executing Demos
+
+```
+cd demo
+
+# Install dependencies in new own virtualenv
+virtualenv env
+source env/bin/activate
+pip install -r requirements.txt
+
+# Run examples
+./spotcheck_facesvegetables.py
+./automl_digits.py
+./automl_facesvegetables.py
+```
