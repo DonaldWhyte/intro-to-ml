@@ -5,18 +5,18 @@
     "js/reveal.js",
     "css/reveal.css"
   ],
-  "homepage": "http://lab.hakim.se/reveal-js/",
+  "homepage": "http://donaldwhyte.co.uk",
   "license": "MIT",
-  "description": "The HTML Presentation Framework",
+  "description": "Introduction to Machine Learning",
   "authors": [
-    "Hakim El Hattab <hakim.elhattab@gmail.com>"
+    "Donald Whyte <donaldwhyte0@gmail.com>"
   ],
   "dependencies": {
     "headjs": "~1.0.3"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
+    "url": "git://github.com/DonaldWhyte/intro-to-ml.git"
   },
   "ignore": [
     "**/.*",

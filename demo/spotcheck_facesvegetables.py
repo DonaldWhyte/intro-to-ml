@@ -17,9 +17,26 @@ import arff
 from tabulate import tabulate
 from operator import itemgetter
 
+
 # ------------------------------------------------------------------------------
 # Dataset Loading
 # ------------------------------------------------------------------------------
+def createLabelValueMapping(labelTypes):
+    vals = {}
+    count = 0
+
+    # Sorted given label types to ensure mapping is the same when the same
+    # types are given in multiple runs
+    for label in sorted(labelTypes):
+        vals[label] = count
+        count += 1
+
+    return vals
+
+
+def assignValuesToLabels(rawLabels, labelValueMapping):
+    return [ labelValueMapping[l] for l in rawLabels ]
+
 
 def loadArffDataset(filename, normalise, displayData=False):
     with open(filename) as f:
@@ -48,35 +65,17 @@ def loadArffDataset(filename, normalise, displayData=False):
 
     return featureVecs, labels, numInputFeatures, numLabelTypes
 
-# ------------------------------------------------------------------------------
-# Dataset Preprocessing
-# ------------------------------------------------------------------------------
-def createLabelValueMapping(labelTypes):
-    vals = {}
-    count = 0
-
-    # Sorted given label types to ensure mapping is the same when the same
-    # types are given in multiple runs
-    for label in sorted(labelTypes):
-        vals[label] = count
-        count += 1
-
-    return vals
 
 # ------------------------------------------------------------------------------
 # Evaluation
 # ------------------------------------------------------------------------------
-
-def assignValuesToLabels(rawLabels, labelValueMapping):
-    return [ labelValueMapping[l] for l in rawLabels ]
-
-
 def evaluateClassifiers(classifiers, featureVecs, labels, kFolds):
     results = {}
     for name, classifier in classifiers.items():
         results[name] = cross_validation.cross_val_score(
                                      classifier, featureVecs, labels, cv=kFolds)
     return results
+
 
 def computeOverallScores(results):
     overallScores = []
@@ -90,10 +89,10 @@ def computeOverallScores(results):
     overallScores.sort(key=itemgetter(1), reverse=True)
     return overallScores
 
+
 # ------------------------------------------------------------------------------
 # Test Harness
 # ------------------------------------------------------------------------------
-
 if __name__ == '__main__':
     # Load dataset
     featureVecs, labels, numFeatures, numLabelTypes = loadArffDataset(
