@@ -1,6 +1,6 @@
 # Introduction to Machine Learning
 
-### [View Presentation](http://donaldwhyte.github.io/intro-to-ml/)
+### [View Presentation](http://donaldwhyte.github.io/intro-to-ml/automated)
 
 Presentation briefly introducing machine learning, what is it, why its use has grown significantly in the past decade, its current state and how to apply it to solve real world problems.
 
