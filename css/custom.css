@@ -100,6 +100,14 @@ img[alt="department for transport"] {
     margin: 5px;
 }
 
+img[alt="Hack4Egypt 2016"] {
+    width: 250px;
+}
+
+.logo-padding {
+    height: 80px;
+}
+
 /* Applications */
 
 img[alt="education"] {
